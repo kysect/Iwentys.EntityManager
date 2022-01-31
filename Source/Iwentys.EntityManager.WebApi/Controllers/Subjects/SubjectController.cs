@@ -16,6 +16,13 @@ public class SubjectController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet(nameof(Get))]
+    public async Task<ActionResult<List<SubjectProfileDto>>> Get()
+    {
+        var response = await _mediator.Send(new GetSubjects.Query());
+        return Ok(response.Subjects);
+    }
+
     [HttpGet(nameof(SearchSubjects))]
     public async Task<ActionResult<List<SubjectProfileDto>>> SearchSubjects(int? courseId, StudySemester? semester, int? skip, int? take)
     {
