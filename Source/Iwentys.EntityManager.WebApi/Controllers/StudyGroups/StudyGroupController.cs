@@ -15,23 +15,43 @@ public class StudyGroupController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet(nameof(Get))]
+    public async Task<ActionResult<StudyGroupProfileResponseDto>> Get()
+    {
+        GetStudyGroups.Response response = await _mediator.Send(new GetStudyGroups.Query());
+        return Ok(response.Groups);
+    }
 
-    [HttpGet(nameof(GetByCourseId))]
-    public async Task<ActionResult<List<StudyGroupProfileResponseDto>>> GetByCourseId([FromQuery] int? courseId)
+    [HttpGet(nameof(GetStudyGroupById))]
+    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupById(int groupId)
+    {
+        GetStudyGroupById.Response response = await _mediator.Send(new GetStudyGroupById.Query(groupId));
+        return Ok(response.StudyGroup);
+    }
+
+    [HttpPost(nameof(GetStudyGroupsByIdList))]
+    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupsByIdList([FromBody] List<int> groupIdList)
+    {
+        GetStudyGroupsByIdList.Response response = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList.ToList()));
+        return Ok(response.StudyGroups);
+    }
+
+    [HttpGet(nameof(GetStudyGroupsByCourseId))]
+    public async Task<ActionResult<List<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId([FromQuery] int? courseId)
     {
         GetStudyGroupByCourseId.Response response = await _mediator.Send(new GetStudyGroupByCourseId.Query(courseId));
         return Ok(response.Groups);
     }
 
-    [HttpGet(nameof(GetByGroupName))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetByGroupName(string groupName)
+    [HttpGet(nameof(GetStudyGroupByGroupName))]
+    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByGroupName(string groupName)
     {
         GetStudyGroupByName.Response response = await _mediator.Send(new GetStudyGroupByName.Query(groupName));
         return Ok(response.StudyGroup);
     }
 
-    [HttpGet(nameof(GetByStudentId))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetByStudentId(int studentId)
+    [HttpGet(nameof(GetStudyGroupByStudentId))]
+    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByStudentId(int studentId)
     {
         GetStudyGroupByStudent.Response response = await _mediator.Send(new GetStudyGroupByStudent.Query(studentId));
         StudyGroupProfileResponseDto result = response.StudyGroup;
