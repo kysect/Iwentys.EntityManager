@@ -35,8 +35,8 @@ public class StudyGroupController : ControllerBase
     {
         GetStudyGroupByStudent.Response response = await _mediator.Send(new GetStudyGroupByStudent.Query(studentId));
         StudyGroupProfileResponseDto result = response.StudyGroup;
-        if (result is null)
-            return NotFound();
+
+        if (result is null) return NotFound();
 
         return Ok(result);
     }
