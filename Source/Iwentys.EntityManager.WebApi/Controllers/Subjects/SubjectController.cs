@@ -17,11 +17,18 @@ public class SubjectController : ControllerBase
     }
 
     [HttpGet(nameof(SearchSubjects))]
-    public async Task<ActionResult<List<SubjectProfileDto>>> SearchSubjects(int? courseId, StudySemester? semester)
+    public async Task<ActionResult<List<SubjectProfileDto>>> SearchSubjects(int? courseId, StudySemester? semester, int? skip, int? take)
     {
-        var studySearchParameters = new SubjectSearchParametersDto(null, null, courseId, semester, 0, 20);
+        var studySearchParameters = new SubjectSearchParametersDto(null, null, null, courseId, semester, skip, take);
         SearchSubjects.Response response = await _mediator.Send(new SearchSubjects.Query(studySearchParameters));
 
+        return Ok(response.Subjects);
+    }
+
+    [HttpGet(nameof(GetSubjectByStudentId))]
+    public async Task<ActionResult<List<SubjectProfileDto>>> GetSubjectByStudentId(int studentId)
+    {
+        GetSubjectsByStudentId.Response response = await _mediator.Send(new GetSubjectsByStudentId.Query(studentId));
         return Ok(response.Subjects);
     }
 

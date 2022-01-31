@@ -11,7 +11,6 @@ public class GetSubjectById
     public record Query(int SubjectId) : IRequest<Response>;
     public record Response(SubjectProfileDto Subject);
 
-
     public class Handler : IRequestHandler<Query, Response>
     {
         private readonly IwentysEntityManagerDbContext _context;
