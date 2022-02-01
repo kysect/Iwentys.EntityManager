@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentsByIdList
+public class GetStudentProfilesByIdList
 {
     public record Query(List<int> StudentIdList) : IRequest<Response>;
     public record Response(List<StudentInfoDto> Students);

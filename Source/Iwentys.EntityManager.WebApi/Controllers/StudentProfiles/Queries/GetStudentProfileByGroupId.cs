@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentByGithubUsername
+public static class GetStudentProfileByGroupId
 {
-    public record Query(string GithubUsername) : IRequest<Response>;
-    public record Response(StudentInfoDto Student);
+    public record Query(int GroupId) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,9 +24,10 @@ public class GetStudentByGithubUsername
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            StudentInfoDto result = await _mapper
+            List<StudentInfoDto> result = await _mapper
                 .ProjectTo<StudentInfoDto>(_context.Students)
-                .FirstAsync(s => s.GithubUsername == request.GithubUsername, cancellationToken: cancellationToken);
+                .Where(s => s.GroupId == request.GroupId)
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }

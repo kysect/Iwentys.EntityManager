@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.WebApiDtos;
@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentByGithubUsernamesList
+public static class GetStudentProfileByCourseId
 {
-    public record Query(List<string> GithubUsernamesList) : IRequest<Response>;
-    public record Response(List<StudentInfoDto> Students);
+    public record Query(int CourseId) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -26,11 +26,12 @@ public class GetStudentByGithubUsernamesList
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
             List<StudentInfoDto> result = await _context
-                .Students
+                .StudyGroups
+                .Where(g => g.StudyCourseId == request.CourseId)
+                .SelectMany(g => g.Students)
                 .ProjectTo<StudentInfoDto>(_mapper.ConfigurationProvider)
-                .Where(s => request.GithubUsernamesList.Contains(s.GithubUsername))
                 .ToListAsync(cancellationToken: cancellationToken);
-
+            
             return new Response(result);
         }
     }
