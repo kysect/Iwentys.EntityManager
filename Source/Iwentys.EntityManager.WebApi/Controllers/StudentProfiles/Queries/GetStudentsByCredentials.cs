@@ -16,7 +16,7 @@ public class GetStudentsByCredentials
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private static readonly int MinimumMatchPercent = 100;
+        private static readonly int MinimumMatchPercent = 75;
         private readonly IwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
 
