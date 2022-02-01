@@ -26,11 +26,15 @@ public class StudentProfileController : ControllerBase
     public async Task<ActionResult<StudentInfoDto>> GetStudentProfileById(int id)
     {
         GetStudentById.Response response = await _mediator.Send(new GetStudentById.Query(id));
+
+        if (response is null) return NotFound();
+        
         return Ok(response.Student);
     }
 
     [HttpPost(nameof(GetStudentsByIdList))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudentsByIdList([FromBody] List<int> studentIdList)
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudentsByIdList(
+        List<int> studentIdList)
     {
         GetStudentsByIdList.Response response = await _mediator.Send(new GetStudentsByIdList.Query(studentIdList));
         return Ok(response.Students);
@@ -42,11 +46,14 @@ public class StudentProfileController : ControllerBase
         GetStudentByGithubUsername.Response response
             = await _mediator.Send(new GetStudentByGithubUsername.Query(githubUsername));
 
+        if (response is null) return NotFound();
+
         return Ok(response.Student);
     }
 
     [HttpPost(nameof(GetStudentProfilesByGithubUsernamesList))]
-    public async Task<ActionResult<StudentInfoDto>> GetStudentProfilesByGithubUsernamesList(List<string> githubUsernamesList)
+    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfilesByGithubUsernamesList(
+        List<string> githubUsernamesList)
     {
         GetStudentByGithubUsernamesList.Response response
             = await _mediator.Send(new GetStudentByGithubUsernamesList.Query(githubUsernamesList));
@@ -54,26 +61,26 @@ public class StudentProfileController : ControllerBase
         return Ok(response.Students);
     }
 
-    [HttpGet(nameof(GetStudentProfileByGroupId))]
-    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfileByGroupId(int groupId)
+    [HttpGet(nameof(GetStudentProfilesByGroupId))]
+    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfilesByGroupId(int groupId)
     {
         GetStudentByGroupId.Response response = await _mediator.Send(new GetStudentByGroupId.Query(groupId));
         return Ok(response.Students);
     }
 
-    [HttpGet(nameof(GetStudentProfileByCourseId))]
-    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfileByCourseId(int courseId)
+    [HttpGet(nameof(GetStudentProfilesByCourseId))]
+    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfilesByCourseId(int courseId)
     {
         GetStudentByCourseId.Response response = await _mediator.Send(new GetStudentByCourseId.Query(courseId));
         return Ok(response.Students);
     }
 
     // TODO: To fix GroupSubjects list cause it's null and method doesn't work properly
-    [HttpGet(nameof(GetStudentProfilesBySubjectId))]
-    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentProfilesBySubjectId(int subjectId)
+    [HttpGet(nameof(GetStudentsBySubjectId))]
+    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentsBySubjectId(int subjectId)
     {
-        GetStudentProfilesBySubjectId.Response response
-            = await _mediator.Send(new GetStudentProfilesBySubjectId.Query(subjectId));
+        GetStudentsBySubjectId.Response response
+            = await _mediator.Send(new GetStudentsBySubjectId.Query(subjectId));
 
         return Ok(response.Students);
     }
