@@ -12,12 +12,12 @@ public class GetStudyGroups
 
     public class Response
     {
-        public Response(List<StudyGroupProfileResponseDto> groups)
+        public Response(List<StudyGroupProfileResponseDto> studyGroups)
         {
-            Groups = groups;
+            StudyGroups = studyGroups;
         }
 
-        public List<StudyGroupProfileResponseDto> Groups { get; set; }
+        public List<StudyGroupProfileResponseDto> StudyGroups { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Response>

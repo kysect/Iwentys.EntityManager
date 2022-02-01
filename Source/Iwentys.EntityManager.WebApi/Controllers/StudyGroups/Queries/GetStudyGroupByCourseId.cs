@@ -10,7 +10,7 @@ namespace Iwentys.EntityManager.WebApi;
 public class GetStudyGroupByCourseId
 {
     public record Query(int? CourseId) : IRequest<Response>;
-    public record Response(List<StudyGroupProfileResponseDto> Groups);
+    public record Response(List<StudyGroupProfileResponseDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {

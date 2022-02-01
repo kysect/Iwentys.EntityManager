@@ -26,7 +26,7 @@ public class GetStudyGroupById
         {
             var result = await _mapper
                 .ProjectTo<StudyGroupProfileResponseDto>(_context.StudyGroups)
-                .FirstAsync(g => g.Id == request.GroupId, cancellationToken: cancellationToken);
+                .SingleOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken: cancellationToken);
 
             return new Response(result);
         }

@@ -31,7 +31,7 @@ public class GetStudyGroupByName
                 .StudyGroups
                 .Where(StudyGroup.IsMatch(name))
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
-                .SingleAsync(cancellationToken: cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }

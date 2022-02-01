@@ -16,37 +16,46 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(Get))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> Get()
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> Get()
     {
         GetStudyGroups.Response response = await _mediator.Send(new GetStudyGroups.Query());
-        return Ok(response.Groups);
+        return Ok(response.StudyGroups);
     }
 
     [HttpGet(nameof(GetStudyGroupById))]
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupById(int groupId)
     {
         GetStudyGroupById.Response response = await _mediator.Send(new GetStudyGroupById.Query(groupId));
+
+        if (response?.StudyGroup is null) return NotFound();
+
         return Ok(response.StudyGroup);
     }
 
     [HttpPost(nameof(GetStudyGroupsByIdList))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupsByIdList([FromBody] List<int> groupIdList)
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByIdList(
+        List<int> groupIdList)
     {
-        GetStudyGroupsByIdList.Response response = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList.ToList()));
+        GetStudyGroupsByIdList.Response response
+            = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList));
+
         return Ok(response.StudyGroups);
     }
 
     [HttpGet(nameof(GetStudyGroupsByCourseId))]
-    public async Task<ActionResult<List<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId([FromQuery] int? courseId)
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId(int? courseId)
     {
         GetStudyGroupByCourseId.Response response = await _mediator.Send(new GetStudyGroupByCourseId.Query(courseId));
-        return Ok(response.Groups);
+        return Ok(response.StudyGroups);
     }
 
     [HttpGet(nameof(GetStudyGroupByGroupName))]
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByGroupName(string groupName)
     {
         GetStudyGroupByName.Response response = await _mediator.Send(new GetStudyGroupByName.Query(groupName));
+
+        if (response?.StudyGroup is null) return NotFound();
+
         return Ok(response.StudyGroup);
     }
 
@@ -54,10 +63,9 @@ public class StudyGroupController : ControllerBase
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByStudentId(int studentId)
     {
         GetStudyGroupByStudent.Response response = await _mediator.Send(new GetStudyGroupByStudent.Query(studentId));
-        StudyGroupProfileResponseDto result = response.StudyGroup;
 
-        if (result is null) return NotFound();
+        if (response?.StudyGroup is null) return NotFound();
 
-        return Ok(result);
+        return Ok(response.StudyGroup);
     }
 }
