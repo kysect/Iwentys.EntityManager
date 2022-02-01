@@ -75,6 +75,15 @@ public class StudentProfileController : ControllerBase
         return Ok(response.Students);
     }
 
+    [HttpGet(nameof(GetStudentsByCredentials))]
+    public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentsByCredentials(string credentials)
+    {
+        GetStudentsByCredentials.Response response
+            = await _mediator.Send(new GetStudentsByCredentials.Query(credentials));
+
+        return Ok(response.Students);
+    }
+
     // TODO: To fix GroupSubjects list cause it's null and method doesn't work properly
     [HttpGet(nameof(GetStudentsBySubjectId))]
     public async Task<ActionResult<IReadOnlyCollection<StudentInfoDto>>> GetStudentsBySubjectId(int subjectId)
