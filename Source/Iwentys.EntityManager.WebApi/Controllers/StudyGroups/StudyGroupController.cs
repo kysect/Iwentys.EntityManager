@@ -34,10 +34,8 @@ public class StudyGroupController : ControllerBase
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetByStudentId(int studentId)
     {
         GetStudyGroupByStudent.Response response = await _mediator.Send(new GetStudyGroupByStudent.Query(studentId));
-        StudyGroupProfileResponseDto result = response.StudyGroup;
+        StudyGroupProfileResponseDto result = response?.StudyGroup;
 
-        if (result is null) return NotFound();
-
-        return Ok(result);
+        return result is not null ? Ok(result) : NotFound();
     }
 }
