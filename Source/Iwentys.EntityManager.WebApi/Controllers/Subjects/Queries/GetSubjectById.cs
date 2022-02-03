@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetSubjectById
+public static class GetSubjectById
 {
     public record Query(int SubjectId) : IRequest<Response>;
     public record Response(SubjectProfileDto Subject);
@@ -26,7 +26,7 @@ public class GetSubjectById
         {
             SubjectProfileDto result = await _mapper
                 .ProjectTo<SubjectProfileDto>(_context.Subjects)
-                .FirstAsync(s => s.Id == request.SubjectId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(s => s.Id == request.SubjectId, cancellationToken: cancellationToken);
 
             return new Response(result);
         }

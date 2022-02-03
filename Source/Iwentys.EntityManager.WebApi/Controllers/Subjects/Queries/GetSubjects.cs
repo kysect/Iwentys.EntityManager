@@ -6,19 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetSubjects
+public static class GetSubjects
 {
-    public class Query : IRequest<Response> { }
-
-    public class Response
-    {
-        public Response(List<SubjectProfileDto> subjects)
-        {
-            Subjects = subjects;
-        }
-
-        public List<SubjectProfileDto> Subjects { get; set; }
-    }
+    public record Query : IRequest<Response>;
+    public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
     {

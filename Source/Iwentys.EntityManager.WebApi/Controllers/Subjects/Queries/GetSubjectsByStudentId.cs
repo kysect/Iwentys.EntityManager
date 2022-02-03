@@ -7,27 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetSubjectsByStudentId
+public static class GetSubjectsByStudentId
 {
-    public class Query : IRequest<Response>
-    {
-        public int StudentId { get; set; }
-
-        public Query(int studentId)
-        {
-            StudentId = studentId;
-        }
-    }
-
-    public class Response
-    {
-        public Response(List<SubjectProfileDto> subjects)
-        {
-            Subjects = subjects;
-        }
-
-        public List<SubjectProfileDto> Subjects { get; set; }
-    }
+    public record Query(int StudentId) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
     {
