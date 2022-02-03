@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudyGroupById
+public static class GetStudyGroupById
 {
     public record Query(int GroupId) : IRequest<Response>;
     public record Response(StudyGroupProfileResponseDto StudyGroup);

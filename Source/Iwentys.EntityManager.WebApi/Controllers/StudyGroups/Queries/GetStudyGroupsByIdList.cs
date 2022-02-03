@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudyGroupsByIdList
+public static class GetStudyGroupsByIdList
 {
     public record Query(List<int> GroupIdList) : IRequest<Response>;
-    public record Response(List<StudyGroupProfileResponseDto> StudyGroups);
+    public record Response(IReadOnlyCollection<StudyGroupProfileResponseDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {
