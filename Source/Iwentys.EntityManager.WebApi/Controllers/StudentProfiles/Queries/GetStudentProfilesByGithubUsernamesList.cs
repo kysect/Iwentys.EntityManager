@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentProfilesByGithubUsernamesList
+public static class GetStudentProfilesByGithubUsernamesList
 {
     public record Query(List<string> GithubUsernamesList) : IRequest<Response>;
-    public record Response(List<StudentInfoDto> Students);
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {

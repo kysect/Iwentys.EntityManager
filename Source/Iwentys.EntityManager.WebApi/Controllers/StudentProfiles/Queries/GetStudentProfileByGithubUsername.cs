@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentProfileByGithubUsername
+public static class GetStudentProfileByGithubUsername
 {
     public record Query(string GithubUsername) : IRequest<Response>;
     public record Response(StudentInfoDto Student);
@@ -26,7 +26,7 @@ public class GetStudentProfileByGithubUsername
         {
             StudentInfoDto result = await _mapper
                 .ProjectTo<StudentInfoDto>(_context.Students)
-                .FirstAsync(s => s.GithubUsername == request.GithubUsername, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(s => s.GithubUsername == request.GithubUsername, cancellationToken: cancellationToken);
 
             return new Response(result);
         }

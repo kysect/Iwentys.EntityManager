@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudentProfiles
 {
     public record Query : IRequest<Response>;
-    public record Response(List<StudentInfoDto> Students);
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {

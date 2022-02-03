@@ -8,11 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudentProfilesByCredentials
+public static class GetStudentProfilesByCredentials
 {
     public record Query(string UserCredentials) : IRequest<Response>;
-
-    public record Response(List<StudentInfoDto> Students);
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
