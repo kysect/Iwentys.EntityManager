@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.WebApiDtos;
@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudyGroupByCourseId
+public static class GetStudyGroupsByIdList
 {
-    public record Query(int? CourseId) : IRequest<Response>;
-    public record Response(List<StudyGroupProfileResponseDto> Groups);
+    public record Query(List<int> GroupIdList) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<StudyGroupProfileResponseDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -25,10 +25,10 @@ public class GetStudyGroupByCourseId
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<StudyGroupProfileResponseDto> result = await _context
+            var result = await _context
                 .StudyGroups
-                .WhereIf(request.CourseId, gs => gs.StudyCourseId == request.CourseId)
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
+                .Where(g => request.GroupIdList.Contains(g.Id))
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

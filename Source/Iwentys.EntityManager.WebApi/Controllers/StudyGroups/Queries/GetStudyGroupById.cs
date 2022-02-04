@@ -1,16 +1,14 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using AutoMapper;
 using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public class GetStudyGroupByName
+public static class GetStudyGroupById
 {
-    public record Query(string GroupName) : IRequest<Response>;
+    public record Query(int GroupId) : IRequest<Response>;
     public record Response(StudyGroupProfileResponseDto StudyGroup);
 
     public class Handler : IRequestHandler<Query, Response>
@@ -26,12 +24,9 @@ public class GetStudyGroupByName
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            var name = new GroupName(request.GroupName);
-            var result = await _context
-                .StudyGroups
-                .Where(StudyGroup.IsMatch(name))
-                .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
-                .SingleAsync(cancellationToken: cancellationToken);
+            var result = await _mapper
+                .ProjectTo<StudyGroupProfileResponseDto>(_context.StudyGroups)
+                .SingleOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken: cancellationToken);
 
             return new Response(result);
         }
