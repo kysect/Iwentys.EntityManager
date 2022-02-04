@@ -1,4 +1,4 @@
-﻿using Iwentys.EntityManager.WebApiDtos;
+using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +54,6 @@ public class StudyGroupController : ControllerBase
         List<int> groupIdList)
     {
         GetStudyGroupsByIdList.Response response = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList));
-
         return Ok(response.StudyGroups);
     }
 
