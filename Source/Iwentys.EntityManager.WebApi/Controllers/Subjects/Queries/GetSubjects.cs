@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using AutoMapper;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
@@ -7,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public static class SearchSubjects
+public static class GetSubjects
 {
-    public record Query(SubjectSearchParametersDto SearchParametersDto) : IRequest<Response>;
+    public record Query : IRequest<Response>;
     public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
@@ -25,10 +24,8 @@ public static class SearchSubjects
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<SubjectProfileDto> result = await _context
-                .GroupSubjects
-                .SearchSubjects(request.SearchParametersDto)
-                .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
+            List<SubjectProfileDto> result = await _mapper
+                .ProjectTo<SubjectProfileDto>(_context.Subjects)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

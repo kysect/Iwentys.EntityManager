@@ -16,12 +16,10 @@ public class SubjectController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet(nameof(SearchSubjects))]
-    public async Task<ActionResult<List<SubjectProfileDto>>> SearchSubjects(int? courseId, StudySemester? semester)
+    [HttpGet(nameof(Get))]
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> Get()
     {
-        var studySearchParameters = new SubjectSearchParametersDto(null, null, courseId, semester, 0, 20);
-        SearchSubjects.Response response = await _mediator.Send(new SearchSubjects.Query(studySearchParameters));
-
+        var response = await _mediator.Send(new GetSubjects.Query());
         return Ok(response.Subjects);
     }
 
@@ -29,13 +27,32 @@ public class SubjectController : ControllerBase
     public async Task<ActionResult<SubjectProfileDto>> GetSubjectById(int subjectId)
     {
         GetSubjectById.Response response = await _mediator.Send(new GetSubjectById.Query(subjectId));
-        return Ok(response.Subject);
+        var result = response?.Subject;
+
+        return result is not null ? Ok(result) : NotFound();
+    }
+
+    [HttpGet(nameof(GetSubjectsByStudentId))]
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByStudentId(int studentId)
+    {
+        GetSubjectsByStudentId.Response response = await _mediator.Send(new GetSubjectsByStudentId.Query(studentId));
+        return Ok(response.Subjects);
     }
 
     [HttpGet(nameof(GetSubjectsByGroupId))]
-    public async Task<ActionResult<List<SubjectProfileDto>>> GetSubjectsByGroupId(int groupId)
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByGroupId(int groupId)
     {
         GetSubjectsByGroupId.Response response = await _mediator.Send(new GetSubjectsByGroupId.Query(groupId));
+        return Ok(response.Subjects);
+    }
+
+    [HttpGet(nameof(SearchSubjects))]
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> SearchSubjects(
+        int? courseId, StudySemester? semester, int? skip, int? take)
+    {
+        SubjectSearchParametersDto studySearchParameters = new (null, null, null, courseId, semester, skip, take);
+        SearchSubjects.Response response = await _mediator.Send(new SearchSubjects.Query(studySearchParameters));
+
         return Ok(response.Subjects);
     }
 }

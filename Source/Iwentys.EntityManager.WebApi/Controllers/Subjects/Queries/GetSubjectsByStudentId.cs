@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.WebApiDtos;
@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public static class SearchSubjects
+public static class GetSubjectsByStudentId
 {
-    public record Query(SubjectSearchParametersDto SearchParametersDto) : IRequest<Response>;
+    public record Query(int StudentId) : IRequest<Response>;
     public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
@@ -27,7 +27,7 @@ public static class SearchSubjects
         {
             List<SubjectProfileDto> result = await _context
                 .GroupSubjects
-                .SearchSubjects(request.SearchParametersDto)
+                .SearchSubjects(SubjectSearchParametersDto.ForStudent(request.StudentId))
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
