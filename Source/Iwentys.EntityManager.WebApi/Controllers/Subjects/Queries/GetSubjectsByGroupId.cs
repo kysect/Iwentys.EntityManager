@@ -46,7 +46,7 @@ public class GetSubjectsByGroupId
                 .GroupSubjects
                 .SearchSubjects(SubjectSearchParametersDto.ForGroup(request.GroupId))
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }

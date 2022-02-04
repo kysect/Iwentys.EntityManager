@@ -27,7 +27,8 @@ public static class GetGroupSubjectByTeacherId
         {
             List<GroupSubjectInfoDto> result = await _context
                 .GroupSubjects
-                .WhereIf(request.TeacherId, gs => gs.Teachers.Any(m => m.TeacherId == request.TeacherId))
+                .WhereIf(request.TeacherId, gs => gs.Teachers
+                    .Any(m => m.TeacherId == request.TeacherId))
                 .ProjectTo<GroupSubjectInfoDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 

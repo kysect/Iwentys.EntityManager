@@ -27,7 +27,7 @@ public class GetSubjectById
         {
             SubjectProfileDto result = await _mapper
                 .ProjectTo<SubjectProfileDto>(_context.Subjects)
-                .FirstAsync(s => s.Id == request.SubjectId);
+                .FirstAsync(s => s.Id == request.SubjectId, cancellationToken: cancellationToken);
 
             return new Response(result);
         }

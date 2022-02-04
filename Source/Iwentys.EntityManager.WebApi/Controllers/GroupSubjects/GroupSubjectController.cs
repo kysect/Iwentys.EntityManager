@@ -15,7 +15,6 @@ public class GroupSubjectController : ControllerBase
         _mediator = mediator;
     }
 
-
     [HttpGet(nameof(GetGroupSubjectByTeacherId))]
     public async Task<ActionResult<List<GroupSubjectInfoDto>>> GetGroupSubjectByTeacherId(int teacherId)
     {

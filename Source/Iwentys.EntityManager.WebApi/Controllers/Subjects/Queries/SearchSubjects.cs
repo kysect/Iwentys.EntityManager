@@ -29,7 +29,7 @@ public class SearchSubjects
                 .GroupSubjects
                 .SearchSubjects(request.SearchParametersDto)
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }

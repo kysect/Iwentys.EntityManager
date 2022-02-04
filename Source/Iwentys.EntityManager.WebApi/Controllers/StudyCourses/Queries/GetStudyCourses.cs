@@ -27,7 +27,7 @@ public class GetStudyCourses
             List<StudyCourseInfoDto> result = await _context
                 .StudyCourses
                 .Select(c => new StudyCourseInfoDto{CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear})
-                .ToListAsync();
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }

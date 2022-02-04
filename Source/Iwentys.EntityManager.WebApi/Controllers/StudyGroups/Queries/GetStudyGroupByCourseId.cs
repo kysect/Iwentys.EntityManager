@@ -29,7 +29,7 @@ public class GetStudyGroupByCourseId
                 .StudyGroups
                 .WhereIf(request.CourseId, gs => gs.StudyCourseId == request.CourseId)
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }
