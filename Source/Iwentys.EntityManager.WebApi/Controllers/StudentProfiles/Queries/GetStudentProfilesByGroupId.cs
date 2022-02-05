@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public static class GetStudents
+public static class GetStudentProfilesByGroupId
 {
-    public record Query : IRequest<Response>;
-    public record Response(List<StudentInfoDto> Students);
+    public record Query(int GroupId) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -26,6 +26,7 @@ public static class GetStudents
         {
             List<StudentInfoDto> result = await _mapper
                 .ProjectTo<StudentInfoDto>(_context.Students)
+                .Where(s => s.GroupId == request.GroupId)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
