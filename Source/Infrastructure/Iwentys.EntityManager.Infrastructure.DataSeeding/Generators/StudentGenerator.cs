@@ -2,7 +2,7 @@
 using Iwentys.EntityManager.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Iwentys.EntityManager.DataSeeding;
+namespace Iwentys.EntityManager.Infrastructure.DataSeeding;
 
 public class StudentGenerator : IEntityGenerator
 {

@@ -1,6 +1,6 @@
 ﻿using Bogus;
 
-namespace Iwentys.EntityManager.DataSeeding;
+namespace Iwentys.EntityManager.Infrastructure.DataSeeding;
 
 public class FakerSingleton
 {

@@ -2,7 +2,7 @@
 using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.PublicTypes;
 
-namespace Iwentys.EntityManager.DataSeeding;
+namespace Iwentys.EntityManager.Infrastructure.DataSeeding;
 
 public class UsersFaker
 {

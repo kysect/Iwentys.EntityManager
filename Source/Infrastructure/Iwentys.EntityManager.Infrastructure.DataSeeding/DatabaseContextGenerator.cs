@@ -1,7 +1,7 @@
-﻿using Iwentys.EntityManager.DataAccess;
+﻿using Iwentys.EntityManager.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace Iwentys.EntityManager.DataSeeding;
+namespace Iwentys.EntityManager.Infrastructure.DataSeeding;
 
 public class DatabaseContextGenerator : IDbContextSeeder
 {
