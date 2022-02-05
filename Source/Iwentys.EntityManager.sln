@@ -5,19 +5,23 @@ VisualStudioVersion = 17.1.32104.313
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Domain", "Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj", "{88763BB6-922E-4249-9479-9810138429E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.DataAccess", "Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj", "{1CCEE797-DE57-44D8-A1D6-C2C8784C124E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Infrastructure.DataAccess", "Infrastructure\Iwentys.EntityManager.Infrastructure.DataAccess\Iwentys.EntityManager.Infrastructure.DataAccess.csproj", "{1CCEE797-DE57-44D8-A1D6-C2C8784C124E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.WebApi", "Iwentys.EntityManager.WebApi\Iwentys.EntityManager.WebApi.csproj", "{505B36F0-68A8-42AA-B3D6-801C956F1648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Endpoints.Server", "Endpoints\Iwentys.EntityManager.Endpoints.Server\Iwentys.EntityManager.Endpoints.Server.csproj", "{505B36F0-68A8-42AA-B3D6-801C956F1648}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Common", "Iwentys.EntityManager.Common\Iwentys.EntityManager.Common.csproj", "{8E8DDD87-74CE-4D37-9361-2BB396FAC100}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.ApiClient", "Iwentys.EntityManager.ApiClient\Iwentys.EntityManager.ApiClient.csproj", "{B80719B0-20F7-44AF-886F-D334D174DF3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Endpoints.Client", "Endpoints\Iwentys.EntityManager.Endpoints.Client\Iwentys.EntityManager.Endpoints.Client.csproj", "{B80719B0-20F7-44AF-886F-D334D174DF3A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.WebApiDtos", "Iwentys.EntityManager.WebApiDtos\Iwentys.EntityManager.WebApiDtos.csproj", "{0AF6C827-1F01-4964-B8AF-D72BE9A82940}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.PublicTypes", "Iwentys.EntityManager.PublicTypes\Iwentys.EntityManager.PublicTypes.csproj", "{4212651D-39F8-4997-8E9C-50DBF43EDA43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.DataSeeding", "Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj", "{A891E8AE-60B4-4F68-A0C7-4457CBD29141}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.Infrastructure.DataSeeding", "Infrastructure\Iwentys.EntityManager.Infrastructure.DataSeeding\Iwentys.EntityManager.Infrastructure.DataSeeding.csproj", "{A891E8AE-60B4-4F68-A0C7-4457CBD29141}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Endpoints", "Endpoints", "{608E6644-3D8E-46A7-896E-32E988AEE183}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DABD4545-185D-4975-B5ED-E1BF7F582595}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,5 +67,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E84320D9-0D3A-4BE6-A11B-466BD2BE3B84}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{505B36F0-68A8-42AA-B3D6-801C956F1648} = {608E6644-3D8E-46A7-896E-32E988AEE183}
+		{B80719B0-20F7-44AF-886F-D334D174DF3A} = {608E6644-3D8E-46A7-896E-32E988AEE183}
+		{1CCEE797-DE57-44D8-A1D6-C2C8784C124E} = {DABD4545-185D-4975-B5ED-E1BF7F582595}
+		{A891E8AE-60B4-4F68-A0C7-4457CBD29141} = {DABD4545-185D-4975-B5ED-E1BF7F582595}
 	EndGlobalSection
 EndGlobal
