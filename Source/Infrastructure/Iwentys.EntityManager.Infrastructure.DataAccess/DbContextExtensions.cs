@@ -2,7 +2,7 @@
 using Iwentys.EntityManager.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Iwentys.EntityManager.DataAccess;
+namespace Iwentys.EntityManager.Infrastructure.DataAccess;
 
 public static class DbContextExtensions
 {

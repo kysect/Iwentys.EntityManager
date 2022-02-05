@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.DataAccess;
+﻿namespace Iwentys.EntityManager.Infrastructure.DataAccess;
 
 public interface ISpecification<T, TResult>
 {

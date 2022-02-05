@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Iwentys.EntityManager.DataAccess;
+namespace Iwentys.EntityManager.Infrastructure.DataAccess;
 
 public class IwentysEntityManagerDbContext : DbContext, IAccountManagementDbContext, IStudyDbContext
 {
