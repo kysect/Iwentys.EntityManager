@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj" />
+    <ProjectReference Include="..\..\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj" />
   </ItemGroup>
 
 </Project>

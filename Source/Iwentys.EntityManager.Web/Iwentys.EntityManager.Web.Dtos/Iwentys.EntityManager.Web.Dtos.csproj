@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Iwentys.EntityManager.WebApiDtos</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Iwentys.EntityManager.PublicTypes\Iwentys.EntityManager.PublicTypes.csproj" />
+    <ProjectReference Include="..\..\Iwentys.EntityManager.PublicTypes\Iwentys.EntityManager.PublicTypes.csproj" />
   </ItemGroup>
 
 </Project>
