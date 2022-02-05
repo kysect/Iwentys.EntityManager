@@ -27,7 +27,8 @@ public static class GetSubjectsByGroupId
         {
             List<SubjectProfileDto> result = await _context
                 .GroupSubjects
-                .SearchSubjects(SubjectSearchParametersDto.ForGroup(request.GroupId))
+                .Where(gs => gs.StudyGroupId == request.GroupId)
+                .Select(gs => gs.Subject)
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
