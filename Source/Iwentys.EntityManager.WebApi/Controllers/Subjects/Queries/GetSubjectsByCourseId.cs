@@ -27,10 +27,10 @@ public static class GetSubjectsByCourseId
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
             List<SubjectProfileDto> result = await _context
-                .StudyGroups
-                .Where(g => g.StudyCourseId == request.CourseId)
-                .SelectMany(g => g.GroupSubjects.Select(gs => gs.Subject))
-                .Distinct()
+                .GroupSubjects
+                .Where(gs => gs.StudyGroup.StudyCourseId == request.CourseId)
+                .Select(gs => gs.Subject)
+                .Distinct() 
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
