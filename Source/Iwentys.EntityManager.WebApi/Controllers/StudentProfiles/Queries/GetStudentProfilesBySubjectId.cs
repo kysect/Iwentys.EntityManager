@@ -27,8 +27,7 @@ public static class GetStudentProfilesBySubjectId
         {
             List<StudentInfoDto> result = await _context
                 .StudyGroups.Where(g => g.GroupSubjects
-                    .Select(s => s.Id)
-                    .Contains(request.SubjectId))
+                    .Any(s => s.SubjectId == request.SubjectId))
                 .SelectMany(g => g.Students)
                 .ProjectTo<StudentInfoDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
