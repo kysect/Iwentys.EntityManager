@@ -1,17 +1,19 @@
+using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Iwentys.EntityManager.DataAccess;
+using Iwentys.EntityManager.PublicTypes;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.WebApi;
 
-public static class GetSubjectsByStudentId
+public static class GetSubjectsBySemester
 {
-    public record Query(int StudentId) : IRequest<Response>;
+    public record Query(StudySemester Semester) : IRequest<Response>;
     public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
-
+    
     public class Handler : IRequestHandler<Query, Response>
     {
         private readonly IwentysEntityManagerDbContext _context;
@@ -27,13 +29,14 @@ public static class GetSubjectsByStudentId
         {
             List<SubjectProfileDto> result = await _context
                 .GroupSubjects
-                .Where(gs => gs.StudyGroup.Students
-                    .Any(s => s.Id == request.StudentId))
+                .Where(gs => gs.StudySemester == request.Semester)
                 .Select(gs => gs.Subject)
+                .Distinct()
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);
         }
     }
+
 }
