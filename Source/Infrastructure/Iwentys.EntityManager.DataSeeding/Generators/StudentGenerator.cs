@@ -1,49 +1,51 @@
 ﻿using Bogus;
-using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.DataAccess;
+using Iwentys.EntityManager.Domain.Entities.Study;
+using Iwentys.EntityManager.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
-public class StudentGenerator : IEntityGenerator
+public class StudentGenerator : IDbContextSeeder
 {
     private const int StudentCount = 200;
 
-    public List<Student> Students { get; set; }
-
-    public StudentGenerator(List<StudyGroup> studyGroups)
+    public StudentGenerator(StudyGroupGenerator studyGroupsGenerator, Faker<Student> studentFaker)
     {
-        Students = UsersFaker.Instance.Students
-            .Generate(StudentCount)
-            .ToList();
+        StudyGroup[] studyGroups = studyGroupsGenerator.StudyGroups;
+        var students = studentFaker.Generate(StudentCount);
 
-        Students.Add(new Student
+        foreach (var student in students)
         {
-            Id = 228617,
-            FirstName = "Фреди",
-            MiddleName = "Кисикович",
-            SecondName = "Катс",
-            IsAdmin = true,
-            GithubUsername = "FrediKats",
-            CreationTime = DateTime.UtcNow,
-            LastOnlineTime = DateTime.UtcNow,
-            AvatarUrl = new Faker().Image.PicsumUrl(),
-            GroupId = studyGroups.First(g => g.GroupName.Contains("3505")).Id
-        });
-        
-        foreach (Student student in Students)
-            student.GroupId = FakerSingleton.Instance.PickRandom(studyGroups).Id;
+            var group = FakerSingleton.Instance.PickRandom(studyGroups);
+            group.AddStudent(student);
+        }
 
-        Students
-            .GroupBy(s => s.GroupId)
-            .Select(g => g.FirstOrDefault())
-            .Where(s => s is not null)
-            .ToList()
-            .ForEach(s =>
-            {
-                StudyGroup studyGroup = studyGroups.First();
-                studyGroup.GroupAdminId = s.Id;
-            });
+        foreach (var studyGroup in studyGroups)
+        {
+            var student = FakerSingleton.Instance.PickRandom(studyGroup.Students.ToArray());
+            studyGroup.MakeAdmin(student);
+        }
+
+        var frediGroup = studyGroups.First(g => g.GroupName.Name.Contains("3505"));
+
+        var fredi = new Student(
+            228617,
+            "Фреди",
+            "Кисикович",
+            "Катс",
+            "FrediKats",
+            DateTime.UtcNow,
+            DateTime.UtcNow,
+            new Faker().Image.PicsumUrl());
+
+        frediGroup.AddStudent(fredi);
+        students.Add(fredi);
+
+        Students = students.ToArray();
     }
+
+    public Student[] Students { get; set; }
 
     public void Seed(ModelBuilder modelBuilder)
     {

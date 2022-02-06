@@ -1,18 +1,17 @@
 ﻿using Bogus;
 using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.Domain.Entities.Study;
+using Iwentys.EntityManager.Domain.ValueObjects.Study;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
-public class StudyGroupFaker
+public class StudyGroupFaker : Faker<StudyGroup>
 {
-    public static readonly StudyGroupFaker Instance = new StudyGroupFaker();
-    private readonly Faker _faker = new Faker();
-
-    public StudyGroup CreateGroup()
+    public StudyGroupFaker()
     {
-        return new StudyGroup
-        {
-            GroupName = _faker.Lorem.Word()
-        };
+        CustomInstantiator(f => new StudyGroup(MakeGroupName(f), null));
     }
+
+    private static GroupName MakeGroupName(Faker faker)
+        => new GroupName(faker.Random.Int(0, 10), faker.Random.Int(10, 100));
 }
