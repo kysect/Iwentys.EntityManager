@@ -4,7 +4,7 @@ public class StudyProgram : IEquatable<StudyProgram>
 {
     public StudyProgram(string name)
     {
-        Id = new Guid();
+        Id = Guid.NewGuid();
         Name = name;
     }
 
