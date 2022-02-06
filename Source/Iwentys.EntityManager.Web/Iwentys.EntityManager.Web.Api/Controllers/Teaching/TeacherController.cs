@@ -56,6 +56,6 @@ public class TeacherController : ControllerBase
     {
         GetUserTeacherTypeForSubject.Response response =
             await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
-        return Ok(true);
+        return Ok(response.TeacherType.Count is not 0);
     }
 }
