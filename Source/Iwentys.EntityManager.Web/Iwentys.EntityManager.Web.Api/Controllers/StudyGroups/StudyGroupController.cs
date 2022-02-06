@@ -1,4 +1,4 @@
-using Iwentys.EntityManager.WebApiDtos;
+﻿using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,7 +58,7 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(GetStudyGroupsByCourseId))]
-    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId(int courseId)
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId(Guid courseId)
     {
         GetStudyGroupsByCourseId.Response response = await _mediator.Send(new GetStudyGroupsByCourseId.Query(courseId));
         return Ok(response.StudyGroups);

@@ -1,5 +1,6 @@
 ﻿using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.Domain.Entities.Teaching;
+using Iwentys.EntityManager.Domain.ValueObjects.Study;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,37 +13,33 @@ public static class AddTeacher
 
     public class Handler : IRequestHandler<Command>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IwentysEntityManagerDatabaseContext context)
         {
             _context = context;
         }
-                
+
+        // TODO: Decompose to AddMentor + AddPractice
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            List<GroupSubject> groupSubjects = await _context.GroupSubjects.Where(
-                    gs => gs.SubjectId == request.Args.SubjectId
-                          && request.Args.GroupSubjectIds.Contains(gs.StudyGroupId))
+            List<GroupSubject> groupSubjects = await _context.GroupSubjects
+                .Where(gs =>
+                    gs.Subject.Id == request.Args.SubjectId
+                    && request.Args.GroupSubjectIds.Contains(gs.StudyGroup.Id))
                 .ToListAsync(cancellationToken);
-                
-            foreach (GroupSubject groupSubject in groupSubjects)
-            {
-                if (groupSubject.Teachers.Any(m => m.TeacherType == request.Args.TeacherType && m.TeacherId == request.Args.TeacherId))
-                    continue;
-                    
-                groupSubject.Teachers.Add(new GroupSubjectTeacher()
-                {
-                    TeacherType = request.Args.TeacherType,
-                    GroupSubjectId = groupSubject.Id,
-                    TeacherId = request.Args.TeacherId
-                });
 
+            var teacher = await _context.Teachers.FindAsync(new object[] { request.Args.TeacherId }, cancellationToken);
+            var type = TeacherType.Parse(request.Args.TeacherType);
+
+            foreach (var groupSubject in groupSubjects)
+            {
+                groupSubject.AddTeacher(teacher, type);
                 _context.GroupSubjects.Update(groupSubject);
             }
 
             await _context.SaveChangesAsync(cancellationToken);
-                
+
             return Unit.Value;
         }
     }

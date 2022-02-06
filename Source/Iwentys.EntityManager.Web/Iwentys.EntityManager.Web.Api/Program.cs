@@ -13,7 +13,7 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<IwentysEntityManagerDbContext>(o => o
+builder.Services.AddDbContext<IwentysEntityManagerDatabaseContext>(o => o
     .UseLazyLoadingProxies()
     .UseInMemoryDatabase("InMemoryIwentysEntityManager.db")
     .EnableSensitiveDataLogging()
@@ -21,7 +21,7 @@ builder.Services.AddDbContext<IwentysEntityManagerDbContext>(o => o
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
-builder.Services.AddScoped<DbContext, IwentysEntityManagerDbContext>();
+builder.Services.AddScoped<DbContext, IwentysEntityManagerDatabaseContext>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     using (IServiceScope serviceScope = app.Services.CreateScope())
     {
-        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
+        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDatabaseContext>();
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
     }

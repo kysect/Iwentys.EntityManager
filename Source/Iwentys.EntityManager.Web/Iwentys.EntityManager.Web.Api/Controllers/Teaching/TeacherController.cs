@@ -1,5 +1,4 @@
-﻿using Iwentys.EntityManager.PublicTypes;
-using Iwentys.EntityManager.WebApiDtos;
+﻿using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +30,7 @@ public class TeacherController : ControllerBase
     }
 
     [HttpDelete(nameof(RemoveMentorFromGroup))]
-    public async Task<ActionResult> RemoveMentorFromGroup([FromQuery] int groupSubjectId, [FromQuery] int mentorId)
+    public async Task<ActionResult> RemoveMentorFromGroup([FromQuery] Guid groupSubjectId, [FromQuery] int mentorId)
     {
         await _mediator.Send(new RemoveTeacherFromGroup.Command(groupSubjectId, mentorId));
         return Ok();
@@ -45,16 +44,18 @@ public class TeacherController : ControllerBase
     }
 
     [HttpPost(nameof(GetUserTeacherTypeForSubject))]
-    public async Task<ActionResult<TeacherType>> GetUserTeacherTypeForSubject(int userId, int subjectId)
+    public async Task<ActionResult<string>> GetUserTeacherTypeForSubject(int userId, Guid subjectId)
     {
-        GetUserTeacherTypeForSubject.Response response = await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
+        GetUserTeacherTypeForSubject.Response response =
+            await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
         return Ok(response.TeacherType);
     }
 
     [HttpPost(nameof(IsUserHasTeacherPermissionForSubject))]
-    public async Task<ActionResult<bool>> IsUserHasTeacherPermissionForSubject(int userId, int subjectId)
+    public async Task<ActionResult<bool>> IsUserHasTeacherPermissionForSubject(int userId, Guid subjectId)
     {
-        GetUserTeacherTypeForSubject.Response response = await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
-        return Ok(response.TeacherType != TeacherType.None);
+        GetUserTeacherTypeForSubject.Response response =
+            await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
+        return Ok(true);
     }
 }

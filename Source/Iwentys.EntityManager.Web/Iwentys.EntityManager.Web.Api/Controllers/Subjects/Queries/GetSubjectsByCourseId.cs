@@ -9,16 +9,16 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetSubjectsByCourseId
 {
-    public record Query(int CourseId) : IRequest<Response>;
+    public record Query(Guid CourseId) : IRequest<Response>;
 
     public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -28,7 +28,7 @@ public static class GetSubjectsByCourseId
         {
             List<SubjectProfileDto> result = await _context
                 .GroupSubjects
-                .Where(gs => gs.StudyGroup.StudyCourseId == request.CourseId)
+                .Where(gs => gs.StudyGroup.StudyCourse.Id == request.CourseId)
                 .Select(gs => gs.Subject)
                 .Distinct() 
                 .ProjectTo<SubjectProfileDto>(_mapper.ConfigurationProvider)

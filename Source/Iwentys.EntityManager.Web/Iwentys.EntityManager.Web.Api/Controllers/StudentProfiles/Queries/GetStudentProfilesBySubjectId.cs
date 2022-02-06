@@ -9,15 +9,15 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetStudentProfilesBySubjectId
 {
-    public record Query(int SubjectId) : IRequest<Response>;
+    public record Query(Guid SubjectId) : IRequest<Response>;
     public record Response(IReadOnlyCollection<StudentInfoDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -27,7 +27,7 @@ public static class GetStudentProfilesBySubjectId
         {
             List<StudentInfoDto> result = await _context
                 .StudyGroups.Where(g => g.GroupSubjects
-                    .Any(s => s.SubjectId == request.SubjectId))
+                    .Any(s => s.Subject.Id == request.SubjectId))
                 .SelectMany(g => g.Students)
                 .ProjectTo<StudentInfoDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);

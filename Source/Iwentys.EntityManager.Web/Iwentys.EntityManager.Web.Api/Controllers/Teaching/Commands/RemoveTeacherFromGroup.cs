@@ -6,28 +6,29 @@ namespace Iwentys.EntityManager.WebApi;
 
 public class RemoveTeacherFromGroup
 {
-    public record Command(int GroupSubjectId, int TeacherId) : IRequest;
+    public record Command(Guid GroupSubjectId, int TeacherId) : IRequest;
 
     public class Handler : IRequestHandler<Command>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IwentysEntityManagerDatabaseContext context)
         {
             _context = context;
         }
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            var groupSubjectMentor = await _context.GroupSubjectTeacher.FirstOrDefaultAsync(gsm =>
-                gsm.TeacherId == request.TeacherId
-                && gsm.GroupSubjectId == request.GroupSubjectId,
-                cancellationToken);
+            var groupSubjectMentor = await _context.GroupSubjectTeachers
+                .FirstOrDefaultAsync(gsm =>
+                        gsm.Teacher.Id == request.TeacherId && 
+                        gsm.GroupSubject.Id == request.GroupSubjectId,
+                    cancellationToken);
 
             if (groupSubjectMentor is null)
                 throw new ArgumentException("User is not mentor", nameof(request));
 
-            _context.GroupSubjectTeacher.Remove(groupSubjectMentor);
+            _context.GroupSubjectTeachers.Remove(groupSubjectMentor);
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

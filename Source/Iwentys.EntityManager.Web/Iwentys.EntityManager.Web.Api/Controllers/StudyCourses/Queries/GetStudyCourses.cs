@@ -9,14 +9,15 @@ namespace Iwentys.EntityManager.WebApi;
 public class GetStudyCourses
 {
     public record Query : IRequest<Response>;
+
     public record Response(List<StudyCourseInfoDto> Courses);
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -26,7 +27,8 @@ public class GetStudyCourses
         {
             List<StudyCourseInfoDto> result = await _context
                 .StudyCourses
-                .Select(c => new StudyCourseInfoDto{CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear})
+                .Select(c => new StudyCourseInfoDto
+                    { CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear })
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

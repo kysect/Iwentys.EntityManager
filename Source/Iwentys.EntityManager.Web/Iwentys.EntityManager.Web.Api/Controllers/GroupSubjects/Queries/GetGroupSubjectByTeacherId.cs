@@ -14,10 +14,10 @@ public static class GetGroupSubjectByTeacherId
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -28,7 +28,7 @@ public static class GetGroupSubjectByTeacherId
             List<GroupSubjectInfoDto> result = await _context
                 .GroupSubjects
                 .WhereIf(request.TeacherId, gs => gs.Teachers
-                    .Any(m => m.TeacherId == request.TeacherId))
+                    .Any(m => m.Teacher.Id == request.TeacherId))
                 .ProjectTo<GroupSubjectInfoDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 

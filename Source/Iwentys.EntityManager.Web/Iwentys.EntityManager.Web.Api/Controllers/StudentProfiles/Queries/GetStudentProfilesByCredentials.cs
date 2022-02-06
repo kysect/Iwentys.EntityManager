@@ -16,10 +16,10 @@ public static class GetStudentProfilesByCredentials
     public class Handler : IRequestHandler<Query, Response>
     {
         private static readonly int MinimumMatchPercent = 75;
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -48,12 +48,12 @@ public static class GetStudentProfilesByCredentials
 
             // Dict with (student, CredentialsMatchPercents) for debug and to ensure if it works properly
             // var debugDictionary = filteredResult.ToDictionary(
-            //     s => $"{s.FirstName} {s.MiddleName} {s.SecondName}",
+            //     s => $"{s.FirstName} {s.MiddleName} {s.LastName}",
             //     matchSum => new
             //     {
             //         FirstNameMatch = OneCredentialMatchPercent(credentials, matchSum.FirstName),
             //         MiddleNameMatch = OneCredentialMatchPercent(credentials, matchSum.MiddleName),
-            //         SecondNameMatch = OneCredentialMatchPercent(credentials, matchSum.SecondName),
+            //         SecondNameMatch = OneCredentialMatchPercent(credentials, matchSum.LastName),
             //         MatchSum = CredentialsMatchPercentSum(credentials, matchSum),
             //     });
 
@@ -63,15 +63,15 @@ public static class GetStudentProfilesByCredentials
         /// <summary>
         /// <b>Briefly</b>: Finding sum of matching percent between each student's credential fields (substrings) and given credentials string.
         /// <br /> <br />
-        /// Compares all student's credentials: FirstName, MiddleName, and SecondName using Fuzz smart comparing function.
+        /// Compares all student's credentials: FirstName, MiddleName, and LastName using Fuzz smart comparing function.
         /// <br />
         /// Normally, 70-80% is a good match for different ways to write credentials.
         /// <br /> <br />
         /// <b>For example</b>, comparing strings "Misha" and "Mikhail" give 80%.
         /// </summary>
         /// <param name="credentials">Given credentials string to compare with.</param>
-        /// <param name="studentInfoDto">Student Dto where FirstName, MiddleName, and SecondName will be substrings to compare.</param>
-        /// <returns>Sum of match percents of each credential: FirstName, MiddleName and SecondName</returns>
+        /// <param name="studentInfoDto">Student Dto where FirstName, MiddleName, and LastName will be substrings to compare.</param>
+        /// <returns>Sum of match percents of each credential: FirstName, MiddleName and LastName</returns>
         private int CredentialsMatchPercentSum(string credentials, StudentInfoDto studentInfoDto)
         {
             return Fuzz.PartialRatio(credentials.ToLower(), studentInfoDto.FirstName.ToLower()) +

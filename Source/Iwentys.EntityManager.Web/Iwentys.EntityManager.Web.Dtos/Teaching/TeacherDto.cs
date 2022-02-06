@@ -1,20 +1,16 @@
-﻿using Iwentys.EntityManager.PublicTypes;
-
-namespace Iwentys.EntityManager.WebApiDtos;
+﻿namespace Iwentys.EntityManager.WebApiDtos;
 
 public class TeacherDto
 {
     public int Id { get; set; }
-    public TeacherType TeacherType { get; set; }
+    public string TeacherType { get; set; }
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string SecondName { get; set; }
 
-    public TeacherDto()
-    {
-    }
+    public TeacherDto() { }
 
-    public TeacherDto(int id, TeacherType teacherType, string firstName, string middleName, string secondName)
+    public TeacherDto(int id, string teacherType, string firstName, string middleName, string secondName)
     {
         TeacherType = teacherType;
         Id = id;

@@ -1,5 +1,4 @@
-﻿using Iwentys.EntityManager.PublicTypes;
-using Iwentys.EntityManager.WebApiDtos;
+﻿using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,21 +39,21 @@ public class SubjectController : ControllerBase
     }
 
     [HttpGet(nameof(GetSubjectsByGroupId))]
-    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByGroupId(int groupId)
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByGroupId(Guid groupId)
     {
         GetSubjectsByGroupId.Response response = await _mediator.Send(new GetSubjectsByGroupId.Query(groupId));
         return Ok(response.Subjects);
     }
 
     [HttpGet(nameof(GetSubjectsByCourseId))]
-    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByCourseId(int courseId)
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsByCourseId(Guid courseId)
     {
         GetSubjectsByCourseId.Response response = await _mediator.Send(new GetSubjectsByCourseId.Query(courseId));
         return Ok(response.Subjects);
     }
 
     [HttpGet(nameof(GetSubjectsBySemester))]
-    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsBySemester(StudySemester semester)
+    public async Task<ActionResult<IReadOnlyCollection<SubjectProfileDto>>> GetSubjectsBySemester(string semester)
     {
         GetSubjectsBySemester.Response response = await _mediator.Send(new GetSubjectsBySemester.Query(semester));
         return Ok(response.Subjects);

@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.Domain.Entities.Study;
+using Iwentys.EntityManager.Domain.Entities.Teaching;
+using Iwentys.EntityManager.Domain.Entities.Users;
 using Iwentys.EntityManager.WebApiDtos;
 
 namespace Iwentys.EntityManager.WebApi;
@@ -42,7 +45,7 @@ public class EntityManagerMappingProfile : Profile
         CreateMap<GroupSubjectTeacher, TeacherDto>()
             .ForMember(gs => gs.Id,
                 map =>
-                    map.MapFrom(gsm => gsm.TeacherId))
+                    map.MapFrom(gsm => gsm.Teacher.Id))
             .ForMember(gs => gs.FirstName,
                 map =>
                     map.MapFrom(gsm => gsm.Teacher.FirstName))
@@ -51,6 +54,6 @@ public class EntityManagerMappingProfile : Profile
                     map.MapFrom(gsm => gsm.Teacher.MiddleName))
             .ForMember(gs => gs.SecondName,
                 map =>
-                    map.MapFrom(gsm => gsm.Teacher.SecondName));
+                    map.MapFrom(gsm => gsm.Teacher.LastName));
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.PublicTypes;
+using Iwentys.EntityManager.Domain.ValueObjects.Study;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,14 +7,14 @@ namespace Iwentys.EntityManager.WebApi;
 
 public class GetUserTeacherTypeForSubject
 {
-    public record Query(int UserId, int SubjectId) : IRequest<Response>;
-    public record Response(TeacherType TeacherType);
+    public record Query(int UserId, Guid SubjectId) : IRequest<Response>;
+    public record Response(IReadOnlyCollection<string> TeacherType);
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IwentysEntityManagerDatabaseContext context)
         {
             _context = context;
         }
@@ -22,16 +22,14 @@ public class GetUserTeacherTypeForSubject
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
             List<TeacherType> teacherTypes = await _context
-                .GroupSubjectTeacher
-                .Where(gst => gst.GroupSubject.SubjectId == request.SubjectId)
-                .Where(gst => gst.TeacherId == request.UserId)
+                .GroupSubjectTeachers
+                .Where(gst => gst.GroupSubject.Subject.Id == request.SubjectId)
+                .Where(gst => gst.Teacher.Id == request.UserId)
                 .Select(gst => gst.TeacherType)
                 .Distinct()
                 .ToListAsync(cancellationToken: cancellationToken);
-
-            TeacherType aggregatedType = teacherTypes.Aggregate(TeacherType.None, (current, next) => current | next);
-
-            return new Response(aggregatedType);
+            
+            return new Response(teacherTypes.Select(t => t.Value).ToArray());
         }
     }
 }

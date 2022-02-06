@@ -9,15 +9,15 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetStudyGroupsByCourseId
 {
-    public record Query(int CourseId) : IRequest<Response>;
+    public record Query(Guid CourseId) : IRequest<Response>;
     public record Response(IReadOnlyCollection<StudyGroupProfileResponseDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -27,7 +27,7 @@ public static class GetStudyGroupsByCourseId
         {
             List<StudyGroupProfileResponseDto> result = await _context
                 .StudyGroups
-                .Where(gs => gs.StudyCourseId == request.CourseId)
+                .Where(gs => gs.StudyCourse.Id == request.CourseId)
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 

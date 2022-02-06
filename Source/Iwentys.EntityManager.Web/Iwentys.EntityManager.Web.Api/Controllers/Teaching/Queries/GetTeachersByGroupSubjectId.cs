@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.Domain.Entities.Study;
+using Iwentys.EntityManager.Domain.Entities.Teaching;
 using Iwentys.EntityManager.WebApiDtos;
 using MediatR;
 
@@ -13,10 +15,10 @@ public class GetTeachersByGroupSubjectId
 
     public class Handler : IRequestHandler<Query,Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDatabaseContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDatabaseContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
