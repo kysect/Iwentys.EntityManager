@@ -1,6 +1,6 @@
 ﻿namespace Iwentys.EntityManager.Domain.Entities.Users;
 
-public class UniversitySystemUser
+public class UniversitySystemUser : IEquatable<UniversitySystemUser>
 {
     public UniversitySystemUser(int id, string firstName, string middleName, string lastName)
     {
