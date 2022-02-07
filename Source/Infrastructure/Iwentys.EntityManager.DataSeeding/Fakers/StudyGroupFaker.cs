@@ -3,16 +3,20 @@ using Iwentys.EntityManager.Domain;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
-public class StudyGroupFaker
+public class StudyGroupFaker : Faker<StudyGroup>
 {
-    public static readonly StudyGroupFaker Instance = new StudyGroupFaker();
-    private readonly Faker _faker = new Faker();
+    private static readonly Faker _faker = new Faker();
 
-    public StudyGroup CreateGroup()
+    public StudyGroupFaker()
     {
-        return new StudyGroup
-        {
-            GroupName = _faker.Lorem.Word()
-        };
+        CustomInstantiator(f => new StudyGroup {Id = GetId(), GroupName = MakeGroupName(f).Name });
     }
+
+    private int GetId()
+    {
+        return _faker.IndexVariable++ + 1;
+    }
+
+    private static GroupName MakeGroupName(Faker faker)
+        => new GroupName(faker.Random.Int(0, 10), faker.Random.Int(10, 100));
 }
