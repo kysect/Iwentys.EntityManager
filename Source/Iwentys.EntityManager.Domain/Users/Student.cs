@@ -1,6 +1,4 @@
-﻿using Iwentys.EntityManager.PublicTypes;
-
-namespace Iwentys.EntityManager.Domain;
+﻿namespace Iwentys.EntityManager.Domain;
 
 public class Student : IwentysUser
 {

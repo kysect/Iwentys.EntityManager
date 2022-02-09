@@ -1,5 +1,4 @@
 ﻿using Iwentys.EntityManager.Common;
-using Iwentys.EntityManager.PublicTypes;
 
 namespace Iwentys.EntityManager.Domain;
 

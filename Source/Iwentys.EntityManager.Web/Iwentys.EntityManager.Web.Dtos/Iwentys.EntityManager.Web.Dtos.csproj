@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Iwentys.EntityManager.PublicTypes\Iwentys.EntityManager.PublicTypes.csproj" />
+    <ProjectReference Include="..\..\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.PublicTypes;
+﻿namespace Iwentys.EntityManager.Domain;
 
 [Flags]
 public enum TeacherType
