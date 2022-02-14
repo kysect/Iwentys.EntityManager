@@ -1,5 +1,5 @@
 ﻿using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.PublicTypes;
+using Iwentys.EntityManager.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
