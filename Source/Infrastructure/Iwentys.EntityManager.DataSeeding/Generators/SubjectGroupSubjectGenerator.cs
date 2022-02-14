@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
-using Iwentys.EntityManager.PublicTypes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
