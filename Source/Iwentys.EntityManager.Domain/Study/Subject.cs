@@ -15,7 +15,7 @@ public class Subject
         GroupSubjects = new List<GroupSubject>();
     }
 
-    public GroupSubject AddGroup(StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer = null, IwentysUser practice = null)
+    public GroupSubject AddGroup(StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer, IwentysUser practice)
     {
         var groupSubject = new GroupSubject(this, studyGroup, studySemester, lecturer);
         groupSubject.AddPracticeTeacher(practice);
