@@ -4,6 +4,7 @@ public class StudyProgram
 {
     public StudyProgram(string name)
     {
+        ArgumentNullException.ThrowIfNull(name);
         Name = name;
     }
 

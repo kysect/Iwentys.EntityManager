@@ -4,6 +4,8 @@ public class StudyCourse
 {
     public StudyCourse(StudentGraduationYear graduationYear, StudyProgram studyProgram)
     {
+        ArgumentNullException.ThrowIfNull(studyProgram);
+        
         GraduationYear = graduationYear;
         StudyProgram = studyProgram;
         StudyProgramId = studyProgram.Id;

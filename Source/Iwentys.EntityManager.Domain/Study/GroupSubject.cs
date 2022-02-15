@@ -15,11 +15,13 @@ public class GroupSubject
 
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
 
-    protected GroupSubject() { }
-
     //TODO: enable nullability
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
     {
+        ArgumentNullException.ThrowIfNull(subject);
+        ArgumentNullException.ThrowIfNull(studyGroup);
+        ArgumentNullException.ThrowIfNull(lecturer);
+        
         Subject = subject;
         SubjectId = subject.Id;
         StudyGroup = studyGroup;
@@ -31,6 +33,8 @@ public class GroupSubject
         };
     }
 
+    protected GroupSubject() { }
+
     public void AddPracticeTeacher(IwentysUser practiceTeacher)
     {
         AddTeacher(practiceTeacher, TeacherType.Practice);
@@ -38,6 +42,8 @@ public class GroupSubject
 
     public void AddTeacher(IwentysUser teacher, TeacherType teacherType)
     {
+        ArgumentNullException.ThrowIfNull(teacher);
+        
         if (!IsUserAlreadyAdded(teacher, teacherType))
         {
             throw new IwentysException("User is already practice teacher");
@@ -47,10 +53,14 @@ public class GroupSubject
     }
 
     private bool IsUserAlreadyAdded(IwentysUser teacher, TeacherType teacherType)
-        => !Teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
+    {
+        ArgumentNullException.ThrowIfNull(teacher);
+        return !Teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
+    }
 
     public bool HasTeacherPermission(IwentysUser user)
     {
+        ArgumentNullException.ThrowIfNull(user);
         return Teachers.Any(t => t.TeacherId == user.Id);
     }
 }

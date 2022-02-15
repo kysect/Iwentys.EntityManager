@@ -4,6 +4,9 @@ public class GroupSubjectTeacher
 {
     public GroupSubjectTeacher(IwentysUser teacher, GroupSubject groupSubject, TeacherType teacherType)
     {
+        ArgumentNullException.ThrowIfNull(teacher);
+        ArgumentNullException.ThrowIfNull(groupSubject);
+        
         Teacher = teacher;
         TeacherId = teacher.Id;
         GroupSubject = groupSubject;
