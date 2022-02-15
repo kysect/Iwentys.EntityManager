@@ -22,8 +22,11 @@ public class StudyGroup
         return studyGroup => studyGroup.GroupName == groupName.Name;
     }
 
-    public StudyGroup()
+    public StudyGroup(string groupName, StudyCourse studyCourse)
     {
+        GroupName = groupName;
+        StudyCourse = studyCourse;
+        StudyCourseId = studyCourse.Id;
         Students = new List<Student>();
         GroupSubjects = new List<GroupSubject>();
     }
