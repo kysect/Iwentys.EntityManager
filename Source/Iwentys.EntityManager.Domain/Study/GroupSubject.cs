@@ -29,11 +29,7 @@ public class GroupSubject
         StudySemester = studySemester;
         Teachers = new List<GroupSubjectTeacher>
         {
-            new GroupSubjectTeacher
-            {
-                Teacher = lecturer,
-                TeacherType = TeacherType.Lecturer
-            }
+            new GroupSubjectTeacher(lecturer, this, TeacherType.Lecturer),
         };
     }
 
@@ -49,12 +45,7 @@ public class GroupSubject
             throw new IwentysException("User is already practice teacher");
         }
 
-        Teachers.Add(new GroupSubjectTeacher
-        {
-            GroupSubjectId = Id,
-            TeacherId = teacher.Id,
-            TeacherType = teacherType
-        });
+        Teachers.Add(new GroupSubjectTeacher(teacher, this, teacherType));
     }
 
     private bool IsUserAlreadyAdded(IwentysUser teacher, TeacherType teacherType)
