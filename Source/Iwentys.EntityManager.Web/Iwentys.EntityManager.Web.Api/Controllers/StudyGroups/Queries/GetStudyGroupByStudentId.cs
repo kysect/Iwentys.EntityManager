@@ -9,10 +9,10 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetStudyGroupByStudentId
 {
-    public record Query(int StudentId) : IRequest<Response>;
+    public record Query(int StudentId) : IRequest<Response?>;
     public record Response(StudyGroupProfileResponseDto StudyGroup);
 
-    public class Handler : IRequestHandler<Query, Response>
+    public class Handler : IRequestHandler<Query, Response?>
     {
         private readonly IwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
@@ -23,16 +23,16 @@ public static class GetStudyGroupByStudentId
             _mapper = mapper;
         }
 
-        public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Response?> Handle(Query request, CancellationToken cancellationToken)
         {
-            StudyGroupProfileResponseDto result = await _context
+            StudyGroupProfileResponseDto? result = await _context
                 .Students
                 .Where(sgm => sgm.Id == request.StudentId)
                 .Select(sgm => sgm.Group)
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
-            return new Response(result);
+            return result is not null ? new Response(result) : null;
         }
     }
 }

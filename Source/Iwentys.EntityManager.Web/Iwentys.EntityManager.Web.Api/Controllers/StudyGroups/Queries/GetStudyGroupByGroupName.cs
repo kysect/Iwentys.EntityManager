@@ -10,10 +10,11 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetStudyGroupByGroupName
 {
-    public record Query(string GroupName) : IRequest<Response>;
+    public record Query(string GroupName) : IRequest<Response?>;
+
     public record Response(StudyGroupProfileResponseDto StudyGroup);
 
-    public class Handler : IRequestHandler<Query, Response>
+    public class Handler : IRequestHandler<Query, Response?>
     {
         private readonly IwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
@@ -24,7 +25,7 @@ public static class GetStudyGroupByGroupName
             _mapper = mapper;
         }
 
-        public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Response?> Handle(Query request, CancellationToken cancellationToken)
         {
             var name = new GroupName(request.GroupName);
             var result = await _context
@@ -33,7 +34,7 @@ public static class GetStudyGroupByGroupName
                 .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
-            return new Response(result);
+            return result is not null ? new Response(result) : null;
         }
     }
 }
