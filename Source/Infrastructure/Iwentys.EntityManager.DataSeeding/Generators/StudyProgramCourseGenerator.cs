@@ -12,7 +12,7 @@ public class StudyProgramCourseGenerator : IDbContextSeeder
 
     public StudyProgramCourseGenerator(Faker<StudyProgram> studyProgramFaker)
     {
-        StudyPrograms = new[] { new StudyProgram { Id = 1, Name = "ИС" } };
+        StudyPrograms = new[] { new StudyProgram("ИС") { Id = 1 } };
         var courses = new List<StudyCourse>();
         var identifierGenerator = new IdentifierGenerator();
 
