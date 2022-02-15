@@ -8,18 +8,21 @@ public class IwentysEntityManagerDbContext : DbContext, IAccountManagementDbCont
 {
     private readonly IDbContextSeeder _dbContextSeeder;
 
-    public DbSet<IwentysUser> IwentysUsers { get; set; }
-    public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; }
+    public DbSet<IwentysUser> IwentysUsers { get; set; } = null!;
+    public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; } = null!;
 
-    public DbSet<Student> Students { get; set; }
-    public DbSet<StudyGroup> StudyGroups { get; set; }
-    public DbSet<StudyProgram> StudyPrograms { get; set; }
-    public DbSet<Subject> Subjects { get; set; }
-    public DbSet<GroupSubject> GroupSubjects { get; set; }
-    public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; }
-    public DbSet<StudyCourse> StudyCourses { get; set; }
+    public DbSet<Student> Students { get; set; } = null!;
+    public DbSet<StudyGroup> StudyGroups { get; set; } = null!;
+    public DbSet<StudyProgram> StudyPrograms { get; set; } = null!;
+    public DbSet<Subject> Subjects { get; set; } = null!;
+    public DbSet<GroupSubject> GroupSubjects { get; set; } = null!;
+    public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; } = null!;
+    public DbSet<StudyCourse> StudyCourses { get; set; } = null!;
 
-    public IwentysEntityManagerDbContext(DbContextOptions<IwentysEntityManagerDbContext> options, IDbContextSeeder dbContextSeeder) : base(options)
+    public IwentysEntityManagerDbContext(
+        DbContextOptions<IwentysEntityManagerDbContext> options,
+        IDbContextSeeder dbContextSeeder)
+        : base(options)
     {
         _dbContextSeeder = dbContextSeeder;
     }
