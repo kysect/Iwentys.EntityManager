@@ -9,8 +9,9 @@ public class Subject
 
     public virtual ICollection<GroupSubject> GroupSubjects { get; set; }
 
-    public Subject()
+    public Subject(string title)
     {
+        Title = title;
         GroupSubjects = new List<GroupSubject>();
     }
 
