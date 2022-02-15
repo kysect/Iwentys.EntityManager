@@ -14,10 +14,8 @@ public class GroupSubject
     public virtual StudyGroup StudyGroup { get; init; }
 
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
-        
-    public GroupSubject()
-    {
-    }
+
+    protected GroupSubject() { }
 
     //TODO: enable nullability
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
@@ -53,6 +51,6 @@ public class GroupSubject
 
     public bool HasTeacherPermission(IwentysUser user)
     {
-        return Teachers.Any(t=> t.TeacherId == user.Id);
+        return Teachers.Any(t => t.TeacherId == user.Id);
     }
 }
