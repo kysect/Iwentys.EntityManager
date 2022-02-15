@@ -2,6 +2,13 @@
 
 public class StudyCourse
 {
+    public StudyCourse(StudentGraduationYear graduationYear, StudyProgram studyProgram)
+    {
+        GraduationYear = graduationYear;
+        StudyProgram = studyProgram;
+        StudyProgramId = studyProgram.Id;
+    }
+
     public int Id { get; init; }
     public virtual StudentGraduationYear GraduationYear { get; init; }
 
