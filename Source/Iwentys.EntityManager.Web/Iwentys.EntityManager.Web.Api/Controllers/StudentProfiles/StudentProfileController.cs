@@ -25,8 +25,8 @@ public class StudentProfileController : ControllerBase
     [HttpGet(nameof(GetStudentProfileByGithubUsername))]
     public async Task<ActionResult<StudentInfoDto>> GetStudentProfileByGithubUsername(string githubUsername)
     {
-        GetStudentProfileByGithubUsername.Response? response = await _mediator.Send(new GetStudentProfileByGithubUsername.Query(githubUsername));
-        var result = response?.Student;
+        GetStudentProfileByGithubUsername.Response response = await _mediator.Send(new GetStudentProfileByGithubUsername.Query(githubUsername));
+        var result = response.Student;
 
         return result is not null ? Ok(result) : NotFound();
     }
@@ -34,8 +34,8 @@ public class StudentProfileController : ControllerBase
     [HttpGet(nameof(GetStudentProfileById))]
     public async Task<ActionResult<StudentInfoDto>> GetStudentProfileById(int id)
     {
-        GetStudentProfileById.Response? response = await _mediator.Send(new GetStudentProfileById.Query(id));
-        var result = response?.Student;
+        GetStudentProfileById.Response response = await _mediator.Send(new GetStudentProfileById.Query(id));
+        var result = response.Student;
 
         return result is not null ? Ok(result) : NotFound();
     }

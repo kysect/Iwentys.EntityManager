@@ -8,11 +8,11 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class GetSubjectById
 {
-    public record Query(int SubjectId) : IRequest<Response?>;
+    public record Query(int SubjectId) : IRequest<Response>;
 
-    public record Response(SubjectProfileDto Subject);
+    public record Response(SubjectProfileDto? Subject);
 
-    public class Handler : IRequestHandler<Query, Response?>
+    public class Handler : IRequestHandler<Query, Response>
     {
         private readonly IwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
@@ -23,13 +23,13 @@ public static class GetSubjectById
             _mapper = mapper;
         }
 
-        public async Task<Response?> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
             SubjectProfileDto? result = await _mapper
                 .ProjectTo<SubjectProfileDto>(_context.Subjects)
                 .FirstOrDefaultAsync(gs => gs.Id == request.SubjectId, cancellationToken: cancellationToken);
 
-            return result is not null ? new Response(result) : null;
+            return new Response(result);
         }
     }
 }
