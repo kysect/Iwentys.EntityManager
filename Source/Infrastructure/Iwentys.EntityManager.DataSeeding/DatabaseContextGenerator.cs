@@ -13,7 +13,7 @@ public class DatabaseContextGenerator : IDbContextSeeder
 
         StudyProgramFaker studyProgramFaker = new StudyProgramFaker();
         StudyProgramCourseGenerator studyProgramCourseGenerator = Register(new StudyProgramCourseGenerator(studyProgramFaker));
-        StudyGroupGenerator studyGroupGenerator = Register(new StudyGroupGenerator(new StudyGroupFaker(), studyProgramCourseGenerator));
+        StudyGroupGenerator studyGroupGenerator = Register(new StudyGroupGenerator(new StudyGroupFaker(studyProgramCourseGenerator), studyProgramCourseGenerator));
     }
 
     public void Seed(ModelBuilder modelBuilder)

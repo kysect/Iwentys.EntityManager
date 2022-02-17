@@ -18,9 +18,11 @@ public class StudyProgramCourseGenerator : IDbContextSeeder
 
         for (int i = 0; i < CourseCount; i++)
         {
-            var course = new StudyCourse(StudentGraduationYear.Y22, FakerSingleton.Instance.PickRandom(StudyPrograms))
+            var course = new StudyCourse()
             {
                 Id = identifierGenerator.Next(),
+                GraduationYear = StudentGraduationYear.Y22,
+                StudyProgramId = FakerSingleton.Instance.PickRandom(StudyPrograms).Id
             };
 
             courses.Add(course);

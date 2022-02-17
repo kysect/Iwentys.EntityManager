@@ -2,7 +2,7 @@
 
 public class StudyCourse
 {
-    public StudyCourse(StudentGraduationYear graduationYear, StudyProgram studyProgram)
+    public StudyCourse(StudentGraduationYear graduationYear, StudyProgram studyProgram) : this()
     {
         ArgumentNullException.ThrowIfNull(studyProgram);
         
@@ -10,6 +10,9 @@ public class StudyCourse
         StudyProgram = studyProgram;
         StudyProgramId = studyProgram.Id;
     }
+
+    //TODO:
+    public StudyCourse() {}
 
     public int Id { get; init; }
     public virtual StudentGraduationYear GraduationYear { get; init; }
