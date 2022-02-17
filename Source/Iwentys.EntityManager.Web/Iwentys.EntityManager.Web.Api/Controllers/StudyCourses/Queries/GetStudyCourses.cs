@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public class GetStudyCourses
 {
     public record Query : IRequest<Response>;
-    public record Response(List<StudyCourseInfoDto> Courses);
+    public record Response(List<StudyCourseDto> Courses);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,9 +24,9 @@ public class GetStudyCourses
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<StudyCourseInfoDto> result = await _context
+            List<StudyCourseDto> result = await _context
                 .StudyCourses
-                .Select(c => new StudyCourseInfoDto{CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear})
+                .Select(c => new StudyCourseDto{CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear})
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

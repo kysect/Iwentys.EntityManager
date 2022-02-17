@@ -16,14 +16,14 @@ public class IwentysUserProfileController : ControllerBase
     }
 
     [HttpGet(nameof(Get))]
-    public async Task<ActionResult<List<IwentysUserInfoDto>>> Get()
+    public async Task<ActionResult<List<IwentysUserDto>>> Get()
     {
         GetIwentysUsers.Response response = await _mediator.Send(new GetIwentysUsers.Query());
         return Ok(response.Users);
     }
 
     [HttpGet(nameof(GetById))]
-    public async Task<ActionResult<IwentysUserInfoDto>> GetById(int id)
+    public async Task<ActionResult<IwentysUserDto>> GetById(int id)
     {
         GetIwentysUserById.Response response = await _mediator.Send(new GetIwentysUserById.Query(id));
         var result = response.User;

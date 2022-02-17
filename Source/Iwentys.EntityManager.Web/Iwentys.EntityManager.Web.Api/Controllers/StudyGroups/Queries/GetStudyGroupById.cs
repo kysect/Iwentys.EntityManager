@@ -10,7 +10,7 @@ public static class GetStudyGroupById
 {
     public record Query(int GroupId) : IRequest<Response>;
 
-    public record Response(StudyGroupProfileResponseDto? StudyGroup);
+    public record Response(StudyGroupDto? StudyGroup);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -26,7 +26,7 @@ public static class GetStudyGroupById
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
             var result = await _mapper
-                .ProjectTo<StudyGroupProfileResponseDto>(_context.StudyGroups)
+                .ProjectTo<StudyGroupDto>(_context.StudyGroups)
                 .SingleOrDefaultAsync(g => g.Id == request.GroupId, cancellationToken: cancellationToken);
 
             return new Response(result);

@@ -2,7 +2,7 @@
 
 namespace Iwentys.EntityManager.WebApiDtos;
 
-public class SubjectTeacherCreateArgs
+public class CreateSubjectTeacherRequestDto
 {
     public int SubjectId { get; set; }
     public int TeacherId { get; set; }

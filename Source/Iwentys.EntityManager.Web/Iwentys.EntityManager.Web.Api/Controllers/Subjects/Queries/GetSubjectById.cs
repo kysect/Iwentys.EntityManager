@@ -10,7 +10,7 @@ public static class GetSubjectById
 {
     public record Query(int SubjectId) : IRequest<Response>;
 
-    public record Response(SubjectProfileDto? Subject);
+    public record Response(SubjectDto? Subject);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -25,8 +25,8 @@ public static class GetSubjectById
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            SubjectProfileDto? result = await _mapper
-                .ProjectTo<SubjectProfileDto>(_context.Subjects)
+            SubjectDto? result = await _mapper
+                .ProjectTo<SubjectDto>(_context.Subjects)
                 .FirstOrDefaultAsync(gs => gs.Id == request.SubjectId, cancellationToken: cancellationToken);
 
             return new Response(result);

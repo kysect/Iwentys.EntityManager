@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetSubjects
 {
     public record Query : IRequest<Response>;
-    public record Response(IReadOnlyCollection<SubjectProfileDto> Subjects);
+    public record Response(IReadOnlyCollection<SubjectDto> Subjects);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,8 +24,8 @@ public static class GetSubjects
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<SubjectProfileDto> result = await _mapper
-                .ProjectTo<SubjectProfileDto>(_context.Subjects)
+            List<SubjectDto> result = await _mapper
+                .ProjectTo<SubjectDto>(_context.Subjects)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

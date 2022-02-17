@@ -1,6 +1,6 @@
 ﻿namespace Iwentys.EntityManager.WebApiDtos;
 
-public class IwentysUserInfoDto : UniversitySystemUserInfoDto
+public class IwentysUserDto : UniversitySystemUserDto
 {
     public bool IsAdmin { get; set; }
     public string GithubUsername { get; set; }

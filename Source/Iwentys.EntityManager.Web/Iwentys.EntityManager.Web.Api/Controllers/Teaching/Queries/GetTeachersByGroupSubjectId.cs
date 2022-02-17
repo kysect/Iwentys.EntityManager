@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public class GetTeachersByGroupSubjectId
 {
     public record Query(int GroupSubjectId) : IRequest<Response>;
-    public record Response(GroupTeachersDto GroupTeachers);
+    public record Response(GroupTeachersResponseDto GroupTeachersResponse);
 
     public class Handler : IRequestHandler<Query,Response>
     {
@@ -26,7 +26,7 @@ public class GetTeachersByGroupSubjectId
         {
             GroupSubject groupSubject = await _context.GroupSubjects.GetById(request.GroupSubjectId);
                 
-            var groupMentorsDtos = _mapper.Map<GroupTeachersDto>(groupSubject);
+            var groupMentorsDtos = _mapper.Map<GroupTeachersResponseDto>(groupSubject);
 
             return new Response(groupMentorsDtos);
         }

@@ -8,7 +8,7 @@ namespace Iwentys.EntityManager.WebApi;
 
 public static class AddTeacher
 {
-    public record Command(SubjectTeacherCreateArgs Args) : IRequest;
+    public record Command(CreateSubjectTeacherRequestDto Args) : IRequest;
 
     public class Handler : IRequestHandler<Command>
     {

@@ -1,6 +1,6 @@
 ﻿namespace Iwentys.EntityManager.WebApiDtos;
 
-public class UniversitySystemUserInfoDto
+public class UniversitySystemUserDto
 {
     public int Id { get; init; }
 

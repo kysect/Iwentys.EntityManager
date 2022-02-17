@@ -16,7 +16,7 @@ public class GroupSubjectController : ControllerBase
     }
 
     [HttpGet(nameof(GetGroupSubjectByTeacherId))]
-    public async Task<ActionResult<List<GroupSubjectInfoDto>>> GetGroupSubjectByTeacherId(int teacherId)
+    public async Task<ActionResult<List<GroupSubjectDto>>> GetGroupSubjectByTeacherId(int teacherId)
     {
         GetGroupSubjectByTeacherId.Response response = await _mediator.Send(new GetGroupSubjectByTeacherId.Query(teacherId));
         return Ok(response.Groups);

@@ -24,10 +24,10 @@ public class TeacherController : ControllerBase
     }
 
     [HttpGet("by-group-subject/{id}")]
-    public async Task<ActionResult<GroupTeachersDto>> GetByGroupSubject(int id)
+    public async Task<ActionResult<GroupTeachersResponseDto>> GetByGroupSubject(int id)
     {
         var groupMentors = await _mediator.Send(new GetTeachersByGroupSubjectId.Query(id));
-        return Ok(groupMentors.GroupTeachers);
+        return Ok(groupMentors.GroupTeachersResponse);
     }
 
     [HttpDelete(nameof(RemoveMentorFromGroup))]
@@ -38,7 +38,7 @@ public class TeacherController : ControllerBase
     }
 
     [HttpPost(nameof(AddMentor))]
-    public async Task<ActionResult> AddMentor([FromBody] SubjectTeacherCreateArgs args)
+    public async Task<ActionResult> AddMentor([FromBody] CreateSubjectTeacherRequestDto args)
     {
         await _mediator.Send(new AddTeacher.Command(args));
         return Ok();

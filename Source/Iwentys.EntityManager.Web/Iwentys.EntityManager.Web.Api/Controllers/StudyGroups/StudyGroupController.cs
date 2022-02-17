@@ -16,14 +16,14 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(Get))]
-    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> Get()
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> Get()
     {
         GetStudyGroups.Response response = await _mediator.Send(new GetStudyGroups.Query());
         return Ok(response.StudyGroups);
     }
 
     [HttpGet(nameof(GetStudyGroupByGroupName))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByGroupName(string groupName)
+    public async Task<ActionResult<StudyGroupDto>> GetStudyGroupByGroupName(string groupName)
     {
         GetStudyGroupByGroupName.Response response = await _mediator.Send(new GetStudyGroupByGroupName.Query(groupName));
         var result = response.StudyGroup;
@@ -32,7 +32,7 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(GetStudyGroupByStudentId))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByStudentId(int studentId)
+    public async Task<ActionResult<StudyGroupDto>> GetStudyGroupByStudentId(int studentId)
     {
         GetStudyGroupByStudentId.Response response = await _mediator.Send(new GetStudyGroupByStudentId.Query(studentId));
         var result = response.StudyGroup;
@@ -41,7 +41,7 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(GetStudyGroupById))]
-    public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupById(int groupId)
+    public async Task<ActionResult<StudyGroupDto>> GetStudyGroupById(int groupId)
     {
         GetStudyGroupById.Response response = await _mediator.Send(new GetStudyGroupById.Query(groupId));
         var result = response.StudyGroup;
@@ -50,7 +50,7 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpPost(nameof(GetStudyGroupsByIdList))]
-    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByIdList(
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> GetStudyGroupsByIdList(
         List<int> groupIdList)
     {
         GetStudyGroupsByIdList.Response response = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList));
@@ -58,7 +58,7 @@ public class StudyGroupController : ControllerBase
     }
 
     [HttpGet(nameof(GetStudyGroupsByCourseId))]
-    public async Task<ActionResult<IReadOnlyCollection<StudyGroupProfileResponseDto>>> GetStudyGroupsByCourseId(int courseId)
+    public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> GetStudyGroupsByCourseId(int courseId)
     {
         GetStudyGroupsByCourseId.Response response = await _mediator.Send(new GetStudyGroupsByCourseId.Query(courseId));
         return Ok(response.StudyGroups);

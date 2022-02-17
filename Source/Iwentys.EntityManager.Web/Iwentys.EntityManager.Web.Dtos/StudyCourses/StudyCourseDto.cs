@@ -1,6 +1,6 @@
 ﻿namespace Iwentys.EntityManager.WebApiDtos;
 
-public class StudyCourseInfoDto
+public class StudyCourseDto
 {
     public int CourseId { get; set; }
     public string CourseTitle { get; set; }

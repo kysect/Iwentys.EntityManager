@@ -16,7 +16,7 @@ public class StudyCourseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<StudyCourseInfoDto>>> Get()
+    public async Task<ActionResult<List<StudyCourseDto>>> Get()
     {
         GetStudyCourses.Response response = await _mediator.Send(new GetStudyCourses.Query());
         return Ok(response.Courses);

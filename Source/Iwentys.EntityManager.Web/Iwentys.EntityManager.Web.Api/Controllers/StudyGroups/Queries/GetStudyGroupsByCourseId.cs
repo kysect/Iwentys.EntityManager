@@ -10,7 +10,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudyGroupsByCourseId
 {
     public record Query(int CourseId) : IRequest<Response>;
-    public record Response(IReadOnlyCollection<StudyGroupProfileResponseDto> StudyGroups);
+    public record Response(IReadOnlyCollection<StudyGroupDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -25,10 +25,10 @@ public static class GetStudyGroupsByCourseId
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<StudyGroupProfileResponseDto> result = await _context
+            List<StudyGroupDto> result = await _context
                 .StudyGroups
                 .Where(gs => gs.StudyCourseId == request.CourseId)
-                .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudyGroupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

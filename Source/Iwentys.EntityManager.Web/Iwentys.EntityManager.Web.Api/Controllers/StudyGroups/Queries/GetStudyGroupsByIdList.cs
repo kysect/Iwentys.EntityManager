@@ -10,7 +10,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudyGroupsByIdList
 {
     public record Query(List<int> GroupIdList) : IRequest<Response>;
-    public record Response(IReadOnlyCollection<StudyGroupProfileResponseDto> StudyGroups);
+    public record Response(IReadOnlyCollection<StudyGroupDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -27,7 +27,7 @@ public static class GetStudyGroupsByIdList
         {
             var result = await _context
                 .StudyGroups
-                .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudyGroupDto>(_mapper.ConfigurationProvider)
                 .Where(g => request.GroupIdList.Contains(g.Id))
                 .ToListAsync(cancellationToken: cancellationToken);
 

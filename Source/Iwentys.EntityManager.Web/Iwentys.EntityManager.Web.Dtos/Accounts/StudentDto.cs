@@ -2,7 +2,7 @@
 
 namespace Iwentys.EntityManager.WebApiDtos;
 
-public class StudentInfoDto : IwentysUserInfoDto
+public class StudentDto : IwentysUserDto
 {
     public StudentType Type { get; init; }
     public int? GroupId { get; set; }
