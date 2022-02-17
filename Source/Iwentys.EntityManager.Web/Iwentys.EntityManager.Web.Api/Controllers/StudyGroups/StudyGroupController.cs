@@ -26,7 +26,7 @@ public class StudyGroupController : ControllerBase
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByGroupName(string groupName)
     {
         GetStudyGroupByGroupName.Response response = await _mediator.Send(new GetStudyGroupByGroupName.Query(groupName));
-        var result = response?.StudyGroup;
+        var result = response.StudyGroup;
 
         return result is not null ? Ok(result) : NotFound();
     }
@@ -35,7 +35,7 @@ public class StudyGroupController : ControllerBase
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupByStudentId(int studentId)
     {
         GetStudyGroupByStudentId.Response response = await _mediator.Send(new GetStudyGroupByStudentId.Query(studentId));
-        var result = response?.StudyGroup;
+        var result = response.StudyGroup;
 
         return result is not null ? Ok(result) : NotFound();
     }
@@ -44,7 +44,7 @@ public class StudyGroupController : ControllerBase
     public async Task<ActionResult<StudyGroupProfileResponseDto>> GetStudyGroupById(int groupId)
     {
         GetStudyGroupById.Response response = await _mediator.Send(new GetStudyGroupById.Query(groupId));
-        var result = response?.StudyGroup;
+        var result = response.StudyGroup;
 
         return result is not null ? Ok(result) : NotFound();
     }

@@ -9,7 +9,8 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetSubjectById
 {
     public record Query(int SubjectId) : IRequest<Response>;
-    public record Response(SubjectProfileDto Subject);
+
+    public record Response(SubjectProfileDto? Subject);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,7 +25,7 @@ public static class GetSubjectById
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            SubjectProfileDto result = await _mapper
+            SubjectProfileDto? result = await _mapper
                 .ProjectTo<SubjectProfileDto>(_context.Subjects)
                 .FirstOrDefaultAsync(gs => gs.Id == request.SubjectId, cancellationToken: cancellationToken);
 

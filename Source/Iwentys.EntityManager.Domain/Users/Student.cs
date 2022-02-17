@@ -2,19 +2,27 @@
 
 public class Student : IwentysUser
 {
-    public Student()
+    public Student(
+        string firstName,
+        string middleName,
+        string lastName,
+        bool isAdmin,
+        string githubUsername,
+        DateTime creationTime,
+        DateTime lastOnlineTime,
+        string avatarUrl,
+        StudyGroup studyGroup,
+        StudentType studentType)
+        : base(firstName, middleName, lastName, isAdmin, githubUsername, creationTime, lastOnlineTime, avatarUrl)
     {
+        ArgumentNullException.ThrowIfNull(studyGroup);
+
+        Type = studentType;
+        Group = studyGroup;
+        GroupId = studyGroup.Id;
     }
 
-    public Student(int id, string firstName, string middleName, string secondName) : this()
-    {
-        Id = id;
-        FirstName = firstName;
-        MiddleName = middleName;
-        SecondName = secondName;
-        CreationTime = DateTime.UtcNow;
-        LastOnlineTime = DateTime.UtcNow;
-    }
+    protected Student() { }
 
     public StudentType Type { get; init; }
     public int? GroupId { get; set; }

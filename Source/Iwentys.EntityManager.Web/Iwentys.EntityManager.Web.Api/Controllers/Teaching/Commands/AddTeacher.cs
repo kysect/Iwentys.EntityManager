@@ -31,12 +31,13 @@ public static class AddTeacher
                 if (groupSubject.Teachers.Any(m => m.TeacherType == request.Args.TeacherType && m.TeacherId == request.Args.TeacherId))
                     continue;
                     
-                groupSubject.Teachers.Add(new GroupSubjectTeacher()
-                {
-                    TeacherType = request.Args.TeacherType,
-                    GroupSubjectId = groupSubject.Id,
-                    TeacherId = request.Args.TeacherId
-                });
+                // TODO: Add Teachers DbSet and invoke proper constructor
+                // groupSubject.Teachers.Add(new GroupSubjectTeacher()
+                // {
+                //     TeacherType = request.Args.TeacherType,
+                //     GroupSubjectId = groupSubject.Id,
+                //     TeacherId = request.Args.TeacherId
+                // });
 
                 _context.GroupSubjects.Update(groupSubject);
             }

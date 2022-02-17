@@ -12,17 +12,15 @@ public class StudyProgramCourseGenerator : IDbContextSeeder
 
     public StudyProgramCourseGenerator(Faker<StudyProgram> studyProgramFaker)
     {
-        StudyPrograms = new[] { new StudyProgram { Id = 1, Name = "ИС" } };
+        StudyPrograms = new[] { new StudyProgram("ИС") { Id = 1 } };
         var courses = new List<StudyCourse>();
         var identifierGenerator = new IdentifierGenerator();
 
         for (int i = 0; i < CourseCount; i++)
         {
-            var course = new StudyCourse
+            var course = new StudyCourse(StudentGraduationYear.Y22, FakerSingleton.Instance.PickRandom(StudyPrograms))
             {
                 Id = identifierGenerator.Next(),
-                GraduationYear = StudentGraduationYear.Y22,
-                StudyProgramId = FakerSingleton.Instance.PickRandom(StudyPrograms).Id
             };
 
             courses.Add(course);

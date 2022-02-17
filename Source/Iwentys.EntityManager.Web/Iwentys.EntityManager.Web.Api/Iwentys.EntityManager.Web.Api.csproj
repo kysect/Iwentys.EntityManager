@@ -6,6 +6,7 @@
         <UserSecretsId>7faa2947-9626-4a1a-acd2-e97c81245cdc</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>Iwentys.EntityManager.WebApi</RootNamespace>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudentProfileById
 {
     public record Query(int StudentId) : IRequest<Response>;
-    public record Response(StudentInfoDto Student);
+    public record Response(StudentInfoDto? Student);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,7 +24,7 @@ public static class GetStudentProfileById
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            StudentInfoDto result = await _mapper
+            StudentInfoDto? result = await _mapper
                 .ProjectTo<StudentInfoDto>(_context.Students)
                 .FirstOrDefaultAsync(s => s.Id == request.StudentId, cancellationToken: cancellationToken);
 

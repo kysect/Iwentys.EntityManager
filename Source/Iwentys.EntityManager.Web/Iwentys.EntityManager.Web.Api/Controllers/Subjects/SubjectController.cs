@@ -27,7 +27,7 @@ public class SubjectController : ControllerBase
     public async Task<ActionResult<SubjectProfileDto>> GetSubjectById(int subjectId)
     {
         GetSubjectById.Response response = await _mediator.Send(new GetSubjectById.Query(subjectId));
-        var result = response?.Subject;
+        var result = response.Subject;
 
         return result is not null ? Ok(result) : NotFound();
     }

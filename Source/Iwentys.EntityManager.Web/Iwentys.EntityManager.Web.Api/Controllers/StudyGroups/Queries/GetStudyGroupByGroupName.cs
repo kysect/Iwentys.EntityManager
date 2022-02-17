@@ -11,7 +11,8 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudyGroupByGroupName
 {
     public record Query(string GroupName) : IRequest<Response>;
-    public record Response(StudyGroupProfileResponseDto StudyGroup);
+
+    public record Response(StudyGroupProfileResponseDto? StudyGroup);
 
     public class Handler : IRequestHandler<Query, Response>
     {

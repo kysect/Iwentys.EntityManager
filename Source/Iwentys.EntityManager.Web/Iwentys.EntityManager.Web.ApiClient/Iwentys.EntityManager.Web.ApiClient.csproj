@@ -9,6 +9,7 @@
     <Company>Kysect</Company>
     <Version>0.0.5</Version>
     <RootNamespace>Iwentys.EntityManager.ApiClient</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>

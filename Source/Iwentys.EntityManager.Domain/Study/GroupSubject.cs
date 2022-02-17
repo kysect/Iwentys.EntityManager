@@ -14,14 +14,13 @@ public class GroupSubject
     public virtual StudyGroup StudyGroup { get; init; }
 
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
-        
-    public GroupSubject()
-    {
-    }
 
-    //TODO: enable nullability
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
     {
+        ArgumentNullException.ThrowIfNull(subject);
+        ArgumentNullException.ThrowIfNull(studyGroup);
+        ArgumentNullException.ThrowIfNull(lecturer);
+        
         Subject = subject;
         SubjectId = subject.Id;
         StudyGroup = studyGroup;
@@ -29,13 +28,11 @@ public class GroupSubject
         StudySemester = studySemester;
         Teachers = new List<GroupSubjectTeacher>
         {
-            new GroupSubjectTeacher
-            {
-                Teacher = lecturer,
-                TeacherType = TeacherType.Lecturer
-            }
+            new GroupSubjectTeacher(lecturer, this, TeacherType.Lecturer),
         };
     }
+
+    protected GroupSubject() { }
 
     public void AddPracticeTeacher(IwentysUser practiceTeacher)
     {
@@ -44,24 +41,25 @@ public class GroupSubject
 
     public void AddTeacher(IwentysUser teacher, TeacherType teacherType)
     {
+        ArgumentNullException.ThrowIfNull(teacher);
+        
         if (!IsUserAlreadyAdded(teacher, teacherType))
         {
             throw new IwentysException("User is already practice teacher");
         }
 
-        Teachers.Add(new GroupSubjectTeacher
-        {
-            GroupSubjectId = Id,
-            TeacherId = teacher.Id,
-            TeacherType = teacherType
-        });
+        Teachers.Add(new GroupSubjectTeacher(teacher, this, teacherType));
     }
 
     private bool IsUserAlreadyAdded(IwentysUser teacher, TeacherType teacherType)
-        => !Teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
+    {
+        ArgumentNullException.ThrowIfNull(teacher);
+        return !Teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
+    }
 
     public bool HasTeacherPermission(IwentysUser user)
     {
-        return Teachers.Any(t=> t.TeacherId == user.Id);
+        ArgumentNullException.ThrowIfNull(user);
+        return Teachers.Any(t => t.TeacherId == user.Id);
     }
 }
