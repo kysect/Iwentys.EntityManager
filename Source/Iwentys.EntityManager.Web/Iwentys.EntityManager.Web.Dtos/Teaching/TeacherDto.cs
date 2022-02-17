@@ -2,13 +2,13 @@
 
 namespace Iwentys.EntityManager.WebApiDtos;
 
-public class TeacherDto
+public record TeacherDto
 {
-    public int Id { get; set; }
-    public TeacherType TeacherType { get; set; }
-    public string FirstName { get; set; }
-    public string MiddleName { get; set; }
-    public string SecondName { get; set; }
+    public int Id { get; init; }
+    public TeacherType TeacherType { get; init; }
+    public string FirstName { get; init; }
+    public string MiddleName { get; init; }
+    public string SecondName { get; init; }
 
     public TeacherDto()
     {

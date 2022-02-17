@@ -1,8 +1,6 @@
 ﻿namespace Iwentys.EntityManager.WebApiDtos;
 
-public record StudyGroupInnerDto
-{
-    public int Id { get; init; }
-    public string GroupName { get; init; }
-    public int? GroupAdminId { get; set; }
-}
+public record StudyGroupInnerDto(
+    int Id,
+    string GroupName,
+    int? GroupAdminId);

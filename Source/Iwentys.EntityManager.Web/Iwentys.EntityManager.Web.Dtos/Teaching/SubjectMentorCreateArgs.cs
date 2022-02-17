@@ -2,10 +2,8 @@
 
 namespace Iwentys.EntityManager.WebApiDtos;
 
-public class CreateSubjectTeacherRequestDto
-{
-    public int SubjectId { get; set; }
-    public int TeacherId { get; set; }
-    public TeacherType TeacherType { get; set; }
-    public IReadOnlyList<int> GroupSubjectIds { get; set; }
-}
+public record CreateSubjectTeacherRequestDto(
+    int SubjectId,
+    int TeacherId,
+    TeacherType TeacherType,
+    IReadOnlyList<int> GroupSubjectIds);

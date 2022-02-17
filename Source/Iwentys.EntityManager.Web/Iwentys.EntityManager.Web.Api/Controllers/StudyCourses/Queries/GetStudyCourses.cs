@@ -26,7 +26,7 @@ public class GetStudyCourses
         {
             List<StudyCourseDto> result = await _context
                 .StudyCourses
-                .Select(c => new StudyCourseDto{CourseId = c.Id, CourseTitle = c.StudyProgram.Name + " " + c.GraduationYear})
+                .Select(c => new StudyCourseDto(c.Id, c.StudyProgram.Name + " " + c.GraduationYear))
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

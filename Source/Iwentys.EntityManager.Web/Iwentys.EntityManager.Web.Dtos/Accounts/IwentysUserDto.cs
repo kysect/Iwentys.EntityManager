@@ -1,10 +1,13 @@
 ﻿namespace Iwentys.EntityManager.WebApiDtos;
 
-public class IwentysUserDto : UniversitySystemUserDto
-{
-    public bool IsAdmin { get; set; }
-    public string GithubUsername { get; set; }
-    public DateTime CreationTime { get; init; }
-    public DateTime LastOnlineTime { get; set; }
-    public string AvatarUrl { get; set; }
-}
+public record IwentysUserDto(
+        int Id,
+        string FirstName,
+        string MiddleName,
+        string SecondName,
+        bool IsAdmin,
+        string GithubUsername,
+        DateTime CreationTime,
+        DateTime LastOnlineTime,
+        string AvatarUrl)
+    : UniversitySystemUserDto(Id, FirstName, MiddleName, SecondName);

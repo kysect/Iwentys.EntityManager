@@ -2,11 +2,16 @@
 
 namespace Iwentys.EntityManager.WebApiDtos;
 
-public class StudentDto : IwentysUserDto
-{
-    public StudentType Type { get; init; }
-    public int? GroupId { get; set; }
-
-    //public string SocialStatus { get; set; }
-    //public string AdditionalLink { get; set; }
-}
+public record StudentDto(
+        int Id,
+        string FirstName,
+        string MiddleName,
+        string SecondName,
+        bool IsAdmin,
+        string GithubUsername,
+        DateTime CreationTime,
+        DateTime LastOnlineTime,
+        string AvatarUrl,
+        StudentType Type,
+        int? GroupId)
+    : IwentysUserDto(Id, FirstName, MiddleName, SecondName, IsAdmin, GithubUsername, CreationTime, LastOnlineTime, AvatarUrl);
