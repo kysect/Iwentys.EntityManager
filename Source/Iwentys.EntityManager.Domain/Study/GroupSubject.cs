@@ -15,7 +15,6 @@ public class GroupSubject
 
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
 
-    //TODO: enable nullability
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
     {
         ArgumentNullException.ThrowIfNull(subject);
