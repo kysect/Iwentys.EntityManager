@@ -9,5 +9,4 @@ public record IwentysUserDto(
         string GithubUsername,
         DateTime CreationTime,
         DateTime LastOnlineTime,
-        string AvatarUrl)
-    : UniversitySystemUserDto(Id, FirstName, MiddleName, SecondName);
+        string AvatarUrl);

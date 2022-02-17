@@ -13,5 +13,4 @@ public record StudentDto(
         DateTime LastOnlineTime,
         string AvatarUrl,
         StudentType Type,
-        int? GroupId)
-    : IwentysUserDto(Id, FirstName, MiddleName, SecondName, IsAdmin, GithubUsername, CreationTime, LastOnlineTime, AvatarUrl);
+        int? GroupId);
