@@ -12,7 +12,7 @@ public static class GetStudyGroupByGroupName
 {
     public record Query(string GroupName) : IRequest<Response>;
 
-    public record Response(StudyGroupProfileResponseDto? StudyGroup);
+    public record Response(StudyGroupDto? StudyGroup);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -31,7 +31,7 @@ public static class GetStudyGroupByGroupName
             var result = await _context
                 .StudyGroups
                 .Where(StudyGroup.IsMatch(name))
-                .ProjectTo<StudyGroupProfileResponseDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudyGroupDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

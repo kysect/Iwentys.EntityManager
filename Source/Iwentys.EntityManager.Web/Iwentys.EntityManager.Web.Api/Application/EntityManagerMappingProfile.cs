@@ -8,14 +8,14 @@ public class EntityManagerMappingProfile : Profile
 {
     public EntityManagerMappingProfile()
     {
-        CreateMap<UniversitySystemUser, UniversitySystemUserInfoDto>();
-        CreateMap<IwentysUser, IwentysUserInfoDto>();
-        CreateMap<Student, StudentInfoDto>();
+        CreateMap<UniversitySystemUser, UniversitySystemUserDto>();
+        CreateMap<IwentysUser, IwentysUserDto>();
+        CreateMap<Student, StudentDto>();
 
-        CreateMap<Subject, SubjectProfileDto>();
-        CreateMap<StudyGroup, StudyGroupProfileResponsePreviewDto>();
-        CreateMap<StudyGroup, StudyGroupProfileResponseDto>();
-        CreateMap<GroupSubject, GroupSubjectInfoDto>();
+        CreateMap<Subject, SubjectDto>();
+        CreateMap<StudyGroup, StudyGroupInnerDto>();
+        CreateMap<StudyGroup, StudyGroupDto>();
+        CreateMap<GroupSubject, GroupSubjectDto>();
 
         CreateMapForMentors();
     }
@@ -33,7 +33,7 @@ public class EntityManagerMappingProfile : Profile
                 map =>
                     map.MapFrom(g => g.Select(x => x)));
 
-        CreateMap<GroupSubject, GroupTeachersDto>()
+        CreateMap<GroupSubject, GroupTeachersResponseDto>()
             .ForMember(gm => gm.GroupName,
                 map =>
                     map.MapFrom(gs => gs.StudyGroup.GroupName));

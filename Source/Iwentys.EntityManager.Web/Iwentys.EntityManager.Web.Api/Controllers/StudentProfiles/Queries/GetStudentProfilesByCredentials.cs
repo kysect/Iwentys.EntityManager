@@ -11,7 +11,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudentProfilesByCredentials
 {
     public record Query(string UserCredentials) : IRequest<Response>;
-    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
+    public record Response(IReadOnlyCollection<StudentDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -31,9 +31,9 @@ public static class GetStudentProfilesByCredentials
             var credentialsAmount = credentials.Split(' ').Length;
 
             // Fuzz couldn't work with await, so I firstly get full students list and then filter it
-            List<StudentInfoDto> result = await _context
+            List<StudentDto> result = await _context
                 .Students
-                .ProjectTo<StudentInfoDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudentDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             var filteredResult = result
@@ -70,13 +70,13 @@ public static class GetStudentProfilesByCredentials
         /// <b>For example</b>, comparing strings "Misha" and "Mikhail" give 80%.
         /// </summary>
         /// <param name="credentials">Given credentials string to compare with.</param>
-        /// <param name="studentInfoDto">Student Dto where FirstName, MiddleName, and SecondName will be substrings to compare.</param>
+        /// <param name="studentDto">Student Dto where FirstName, MiddleName, and SecondName will be substrings to compare.</param>
         /// <returns>Sum of match percents of each credential: FirstName, MiddleName and SecondName</returns>
-        private int CredentialsMatchPercentSum(string credentials, StudentInfoDto studentInfoDto)
+        private int CredentialsMatchPercentSum(string credentials, StudentDto studentDto)
         {
-            return Fuzz.PartialRatio(credentials.ToLower(), studentInfoDto.FirstName.ToLower()) +
-                   Fuzz.PartialRatio(credentials.ToLower(), studentInfoDto.MiddleName.ToLower()) +
-                   Fuzz.PartialRatio(credentials.ToLower(), studentInfoDto.SecondName.ToLower());
+            return Fuzz.PartialRatio(credentials.ToLower(), studentDto.FirstName.ToLower()) +
+                   Fuzz.PartialRatio(credentials.ToLower(), studentDto.MiddleName.ToLower()) +
+                   Fuzz.PartialRatio(credentials.ToLower(), studentDto.SecondName.ToLower());
         }
 
         /// <summary>

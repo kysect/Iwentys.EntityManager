@@ -10,7 +10,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetStudentProfilesByGithubUsernamesList
 {
     public record Query(List<string> GithubUsernamesList) : IRequest<Response>;
-    public record Response(IReadOnlyCollection<StudentInfoDto> Students);
+    public record Response(IReadOnlyCollection<StudentDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -25,9 +25,9 @@ public static class GetStudentProfilesByGithubUsernamesList
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<StudentInfoDto> result = await _context
+            List<StudentDto> result = await _context
                 .Students
-                .ProjectTo<StudentInfoDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<StudentDto>(_mapper.ConfigurationProvider)
                 .Where(s => request.GithubUsernamesList.Contains(s.GithubUsername))
                 .ToListAsync(cancellationToken: cancellationToken);
 

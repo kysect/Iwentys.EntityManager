@@ -34,6 +34,17 @@ public class StudyGroup
         GroupSubjects = new List<GroupSubject>();
     }
 
+    //TODO: remove this ctor
+    public StudyGroup(string groupName, int studyCourseId)
+    {
+        ArgumentNullException.ThrowIfNull(groupName);
+
+        GroupName = groupName;
+        StudyCourseId = studyCourseId;
+        Students = new List<Student>();
+        GroupSubjects = new List<GroupSubject>();
+    }
+
     public static StudyGroup MakeGroupAdmin(IwentysUser initiatorProfile, Student newGroupAdmin)
     {
         ArgumentNullException.ThrowIfNull(initiatorProfile);

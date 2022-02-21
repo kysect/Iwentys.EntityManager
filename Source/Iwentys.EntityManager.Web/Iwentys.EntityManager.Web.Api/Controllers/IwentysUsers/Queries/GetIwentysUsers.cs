@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.WebApi;
 public static class GetIwentysUsers
 {
     public record Query : IRequest<Response>;
-    public record Response(List<IwentysUserInfoDto> Users);
+    public record Response(List<IwentysUserDto> Users);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -24,8 +24,8 @@ public static class GetIwentysUsers
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<IwentysUserInfoDto> result = await _mapper
-                .ProjectTo<IwentysUserInfoDto>(_context.IwentysUsers)
+            List<IwentysUserDto> result = await _mapper
+                .ProjectTo<IwentysUserDto>(_context.IwentysUsers)
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return new Response(result);

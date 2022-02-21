@@ -2,7 +2,7 @@
 
 public class GroupSubjectTeacher
 {
-    public GroupSubjectTeacher(IwentysUser teacher, GroupSubject groupSubject, TeacherType teacherType)
+    public GroupSubjectTeacher(IwentysUser teacher, GroupSubject groupSubject, TeacherType teacherType) : this()
     {
         ArgumentNullException.ThrowIfNull(teacher);
         ArgumentNullException.ThrowIfNull(groupSubject);
@@ -13,6 +13,8 @@ public class GroupSubjectTeacher
         GroupSubjectId = groupSubject.Id;
         TeacherType = teacherType;
     }
+
+    private GroupSubjectTeacher(){}
 
     public int TeacherId { get; set; }
     public virtual IwentysUser Teacher { get; set; }
