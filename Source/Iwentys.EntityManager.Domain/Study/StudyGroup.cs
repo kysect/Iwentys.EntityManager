@@ -16,6 +16,8 @@ public class StudyGroup
 
     public virtual List<Student> Students { get; set; }
     public virtual List<GroupSubject> GroupSubjects { get; set; }
+    
+    public GithubOrganisation GithubOrganisation { get; set; }
 
     public static Expression<Func<StudyGroup, bool>> IsMatch(GroupName groupName)
     {
@@ -74,5 +76,17 @@ public class StudyGroup
         
         initiatorProfile.EnsureIsAdmin();
         GroupAdminId = newGroupAdmin.Id;
+    }
+    
+    public void AddGithubOrganisation(GithubOrganisation githubOrganisation)
+    {
+        ArgumentNullException.ThrowIfNull(githubOrganisation);
+        
+        GithubOrganisation = githubOrganisation;
+    }
+    
+    public void RemoveGithubOrganisation()
+    {
+        GithubOrganisation = null;
     }
 }
