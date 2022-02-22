@@ -5,6 +5,9 @@ namespace Iwentys.EntityManager.Domain;
 
 public class StudyGroup
 {
+    private List<Student> _students;
+    private List<GroupSubject> _groupSubjects;
+
     public int Id { get; set; }
     public string GroupName { get; set; }
 
@@ -14,8 +17,8 @@ public class StudyGroup
     public int? GroupAdminId { get; set; }
     //public Student GroupAdmin { get; set; }
 
-    public virtual List<Student> Students { get; set; }
-    public virtual List<GroupSubject> GroupSubjects { get; set; }
+    public virtual IReadOnlyList<Student> Students => _students.AsReadOnly();
+    public virtual IReadOnlyList<GroupSubject> GroupSubjects => _groupSubjects.AsReadOnly();
 
     public static Expression<Func<StudyGroup, bool>> IsMatch(GroupName groupName)
     {
@@ -30,8 +33,8 @@ public class StudyGroup
         GroupName = groupName;
         StudyCourse = studyCourse;
         StudyCourseId = studyCourse.Id;
-        Students = new List<Student>();
-        GroupSubjects = new List<GroupSubject>();
+        _students = new List<Student>();
+        _groupSubjects = new List<GroupSubject>();
     }
 
     //TODO: remove this ctor
@@ -41,8 +44,8 @@ public class StudyGroup
 
         GroupName = groupName;
         StudyCourseId = studyCourseId;
-        Students = new List<Student>();
-        GroupSubjects = new List<GroupSubject>();
+        _students = new List<Student>();
+        _groupSubjects = new List<GroupSubject>();
     }
 
     public static StudyGroup MakeGroupAdmin(IwentysUser initiatorProfile, Student newGroupAdmin)
@@ -64,7 +67,7 @@ public class StudyGroup
     {
         ArgumentNullException.ThrowIfNull(student);
         
-        Students.Add(student);
+        _students.Add(student);
     }
 
     public void MakeAdmin(IwentysUser initiatorProfile, Student newGroupAdmin)

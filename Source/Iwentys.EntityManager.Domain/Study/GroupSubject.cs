@@ -4,6 +4,8 @@ namespace Iwentys.EntityManager.Domain;
 
 public class GroupSubject
 {
+    private List<GroupSubjectTeacher> _teachers;
+
     public int Id { get; init; }
 
     public int SubjectId { get; init; }
@@ -12,8 +14,7 @@ public class GroupSubject
 
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
-
-    public virtual List<GroupSubjectTeacher> Teachers { get; init; }
+    public virtual IReadOnlyList<GroupSubjectTeacher> Teachers => _teachers.AsReadOnly();
 
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
     {
@@ -26,7 +27,7 @@ public class GroupSubject
         StudyGroup = studyGroup;
         StudyGroupId = studyGroup.Id;
         StudySemester = studySemester;
-        Teachers = new List<GroupSubjectTeacher>
+        _teachers = new List<GroupSubjectTeacher>
         {
             new GroupSubjectTeacher(lecturer, this, TeacherType.Lecturer),
         };
@@ -48,18 +49,18 @@ public class GroupSubject
             throw new IwentysException("User is already practice teacher");
         }
 
-        Teachers.Add(new GroupSubjectTeacher(teacher, this, teacherType));
+        _teachers.Add(new GroupSubjectTeacher(teacher, this, teacherType));
     }
 
     private bool IsUserAlreadyAdded(IwentysUser teacher, TeacherType teacherType)
     {
         ArgumentNullException.ThrowIfNull(teacher);
-        return !Teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
+        return !_teachers.Any(t => t.TeacherId == teacher.Id && t.TeacherType.HasFlag(teacherType));
     }
 
     public bool HasTeacherPermission(IwentysUser user)
     {
         ArgumentNullException.ThrowIfNull(user);
-        return Teachers.Any(t => t.TeacherId == user.Id);
+        return _teachers.Any(t => t.TeacherId == user.Id);
     }
 }

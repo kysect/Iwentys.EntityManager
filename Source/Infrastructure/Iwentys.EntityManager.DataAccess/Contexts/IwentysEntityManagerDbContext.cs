@@ -31,6 +31,13 @@ public class IwentysEntityManagerDbContext : DbContext, IAccountManagementDbCont
     {
         modelBuilder.OnStudyModelCreating();
 
+        modelBuilder.Entity<GroupSubject>().Navigation(gs => gs.Teachers).HasField("_teachers");
+        modelBuilder.Entity<GroupSubject>().HasMany(gs => gs.Teachers).WithOne(t => t.GroupSubject);
+        modelBuilder.Entity<StudyGroup>().Navigation(sg => sg.Students).HasField("_students");
+        modelBuilder.Entity<StudyGroup>().HasMany(sg => sg.Students).WithOne(s => s.Group);
+        modelBuilder.Entity<Subject>().Navigation(s => s.GroupSubjects).HasField("_groupSubjects");
+        modelBuilder.Entity<Subject>().HasMany(s => s.GroupSubjects).WithOne(gs => gs.Subject);
+        
         _dbContextSeeder.Seed(modelBuilder);
 
         RemoveCascadeDeleting(modelBuilder);
