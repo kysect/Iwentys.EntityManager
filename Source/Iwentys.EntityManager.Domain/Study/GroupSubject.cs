@@ -4,7 +4,7 @@ namespace Iwentys.EntityManager.Domain;
 
 public class GroupSubject
 {
-    private List<GroupSubjectTeacher> _teachers;
+    private readonly List<GroupSubjectTeacher> _teachers;
 
     public int Id { get; init; }
 

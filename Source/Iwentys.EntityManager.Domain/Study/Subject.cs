@@ -4,7 +4,7 @@ namespace Iwentys.EntityManager.Domain;
 
 public class Subject
 {
-    private List<GroupSubject> _groupSubjects;
+    private readonly List<GroupSubject> _groupSubjects;
 
     public int Id { get; init; }
     public string Title { get; init; }

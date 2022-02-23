@@ -5,8 +5,8 @@ namespace Iwentys.EntityManager.Domain;
 
 public class StudyGroup
 {
-    private List<Student> _students;
-    private List<GroupSubject> _groupSubjects;
+    private readonly List<Student> _students;
+    private readonly List<GroupSubject> _groupSubjects;
 
     public int Id { get; set; }
     public string GroupName { get; set; }
