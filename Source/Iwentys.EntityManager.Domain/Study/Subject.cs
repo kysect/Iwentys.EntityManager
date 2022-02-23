@@ -4,17 +4,19 @@ namespace Iwentys.EntityManager.Domain;
 
 public class Subject
 {
+    private readonly List<GroupSubject> _groupSubjects;
+
     public int Id { get; init; }
     public string Title { get; init; }
 
-    public virtual ICollection<GroupSubject> GroupSubjects { get; set; }
+    public virtual IReadOnlyList<GroupSubject> GroupSubjects => _groupSubjects.AsReadOnly();
 
     public Subject(string title)
     {
         ArgumentNullException.ThrowIfNull(title);
 
         Title = title;
-        GroupSubjects = new List<GroupSubject>();
+        _groupSubjects = new List<GroupSubject>();
     }
 
     public GroupSubject AddGroup(StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer, IwentysUser practice)
@@ -25,12 +27,12 @@ public class Subject
         
         var groupSubject = new GroupSubject(this, studyGroup, studySemester, lecturer);
         groupSubject.AddPracticeTeacher(practice);
-        GroupSubjects.Add(groupSubject);
+        _groupSubjects.Add(groupSubject);
         return groupSubject;
     }
 
     public static Expression<Func<Subject, bool>> IsAllowedFor(int userId)
     {
-        return s => s.GroupSubjects.Any(gs => gs.Teachers.Any(pm=>pm.TeacherId == userId));
+        return s => s._groupSubjects.Any(gs => gs.Teachers.Any(pm=>pm.TeacherId == userId));
     }
 }
