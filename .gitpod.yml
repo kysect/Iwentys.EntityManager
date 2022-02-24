@@ -7,6 +7,12 @@ tasks:
       dotnet restore
       dotnet build
 
+ports:
+  - port: 5276
+    onOpen: notify
+  - port: 7276
+    onOpen: notify
+
 vscode:
   extensions:
     - muhammad-sammy.csharp
