@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using Iwentys.EntityManager.Application;
-using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Web.Configuration;
 using Iwentys.EntityManager.Web.Controllers;
 using MediatR;
@@ -21,19 +20,13 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPi
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    using (IServiceScope serviceScope = app.Services.CreateScope())
-    {
-        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
-    }
-    
+    app.RecreateEntityManagerDatabase();
 }
 
 app.UseHttpsRedirection();

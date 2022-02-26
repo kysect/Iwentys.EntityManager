@@ -1,6 +1,7 @@
 ﻿using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.DataSeeding;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,5 +21,14 @@ public static class DatabaseConfigurator
         service.AddScoped<DbContext, IwentysEntityManagerDbContext>();
         service.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
         service.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
+    }
+
+    public static void RecreateEntityManagerDatabase(this WebApplication app)
+    {
+        using IServiceScope serviceScope = app.Services.CreateScope();
+
+        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
     }
 }
