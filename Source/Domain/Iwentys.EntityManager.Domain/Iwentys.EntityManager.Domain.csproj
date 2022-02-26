@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Iwentys.EntityManager.Domain.csproj.DotSettings" />
-  </ItemGroup>
-
 </Project>
