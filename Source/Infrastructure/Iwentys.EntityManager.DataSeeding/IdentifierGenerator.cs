@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.Common;
+﻿namespace Iwentys.EntityManager.DataSeeding;
 
 public class IdentifierGenerator
 {

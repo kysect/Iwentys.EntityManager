@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 using Iwentys.EntityManager.Application;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.DataSeeding;
-using Iwentys.EntityManager.WebApi;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
