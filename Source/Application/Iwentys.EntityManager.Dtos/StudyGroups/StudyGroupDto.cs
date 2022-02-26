@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.WebApiDtos;
+﻿namespace Iwentys.EntityManager.Dtos;
 
 public record StudyGroupDto(
     int Id,

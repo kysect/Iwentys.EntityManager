@@ -1,6 +1,6 @@
 ﻿using Iwentys.EntityManager.Domain;
 
-namespace Iwentys.EntityManager.WebApiDtos;
+namespace Iwentys.EntityManager.Dtos;
 
 public record CreateSubjectTeacherRequestDto(
     int SubjectId,
