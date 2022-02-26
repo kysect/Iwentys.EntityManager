@@ -14,13 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="11.0.0" />
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="FuzzySharp" Version="2.0.2" />
-        <PackageReference Include="MediatR" Version="10.0.1" />
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
@@ -28,8 +22,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Application\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj" />
       <ProjectReference Include="..\..\Presentation\Iwentys.EntityManager.Web.Controllers\Iwentys.EntityManager.Web.Controllers.csproj" />
-      <ProjectReference Include="..\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
-      <ProjectReference Include="..\Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj" />
+      <ProjectReference Include="..\Iwentys.EntityManager.Web.Configuration\Iwentys.EntityManager.Web.Configuration.csproj" />
     </ItemGroup>
 
 </Project>

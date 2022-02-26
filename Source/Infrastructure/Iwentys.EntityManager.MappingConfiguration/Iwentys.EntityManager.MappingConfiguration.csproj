@@ -7,14 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Iwentys.EntityManager.Application.Abstractions.csproj.DotSettings" />
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Iwentys.EntityManager.Dtos\Iwentys.EntityManager.Dtos.csproj" />
     <ProjectReference Include="..\..\Domain\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj" />
   </ItemGroup>
 

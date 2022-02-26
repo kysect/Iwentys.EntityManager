@@ -1,48 +1,28 @@
-using System.Text.Json.Serialization;
 using Iwentys.EntityManager.Application;
-using Iwentys.EntityManager.Application.Abstractions;
-using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.DataSeeding;
+using Iwentys.EntityManager.Web.Configuration;
 using Iwentys.EntityManager.Web.Controllers;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddControllers()
     .AddEntityManagerControllers()
-    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+    .SerializeEnumsAsStrings();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<IwentysEntityManagerDbContext>(o => o
-    .UseLazyLoadingProxies()
-    .UseInMemoryDatabase("InMemoryIwentysEntityManager.db")
-    .EnableSensitiveDataLogging()
-    .EnableDetailedErrors());
+builder.Services.AddEntityManagerDatabaseContext();
+builder.Services.InjectEntityManagerLibraries();
 
-builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
-builder.Services.AddScoped<DbContext, IwentysEntityManagerDbContext>();
-builder.Services.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
-
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    using (IServiceScope serviceScope = app.Services.CreateScope())
-    {
-        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
-    }
-    
+    app.RecreateEntityManagerDatabase();
 }
 
 app.UseHttpsRedirection();
