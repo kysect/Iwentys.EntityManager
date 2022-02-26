@@ -1,5 +1,5 @@
 using Iwentys.EntityManager.Application;
-using Iwentys.EntityManager.WebApiDtos;
+using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

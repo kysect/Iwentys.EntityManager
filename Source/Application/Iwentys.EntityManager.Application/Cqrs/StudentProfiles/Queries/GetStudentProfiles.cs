@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Iwentys.EntityManager.DataAccess;
+using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
