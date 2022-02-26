@@ -1,6 +1,8 @@
-﻿using Iwentys.EntityManager.Application.Abstractions;
+﻿using Iwentys.EntityManager.Application;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.DataSeeding;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,7 @@ public static class DatabaseConfigurator
         service.AddScoped<DbContext, IwentysEntityManagerDbContext>();
         service.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
         service.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
+        service.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
     }
 
     public static void RecreateEntityManagerDatabase(this WebApplication app)
