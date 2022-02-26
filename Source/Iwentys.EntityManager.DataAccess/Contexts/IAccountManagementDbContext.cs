@@ -5,6 +5,6 @@ namespace Iwentys.EntityManager.DataAccess;
 
 public interface IAccountManagementDbContext
 {
-    DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; }
-    DbSet<IwentysUser> IwentysUsers { get; set; }
+    public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; }
+    public DbSet<IwentysUser> IwentysUsers { get; set; }
 }
