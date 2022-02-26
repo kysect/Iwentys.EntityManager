@@ -1,3 +1,4 @@
+using Iwentys.EntityManager.Application;
 using Iwentys.EntityManager.Web.Configuration;
 using Iwentys.EntityManager.Web.Controllers;
 using MediatR;
@@ -13,8 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEntityManagerDatabaseContext();
-builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.InjectEntityManagerLibraries();
 
 WebApplication app = builder.Build();
 
