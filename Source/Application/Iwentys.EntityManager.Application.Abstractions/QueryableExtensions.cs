@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Iwentys.EntityManager.DataAccess;
+namespace Iwentys.EntityManager.Application.Abstractions;
 
 public static class QueryableExtensions
 {

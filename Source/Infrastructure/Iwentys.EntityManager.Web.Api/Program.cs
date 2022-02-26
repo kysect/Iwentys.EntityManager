@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Iwentys.EntityManager.Application;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.DataSeeding;
 using MediatR;
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<IwentysEntityManagerDbContext>(o => o
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
 builder.Services.AddScoped<DbContext, IwentysEntityManagerDbContext>();
+builder.Services.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();

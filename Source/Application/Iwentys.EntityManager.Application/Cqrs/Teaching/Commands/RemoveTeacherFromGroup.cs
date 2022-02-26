@@ -1,4 +1,4 @@
-﻿using Iwentys.EntityManager.DataAccess;
+﻿using Iwentys.EntityManager.Application.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +10,9 @@ public class RemoveTeacherFromGroup
 
     public class Handler : IRequestHandler<Command>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IIwentysEntityManagerDbContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IIwentysEntityManagerDbContext context)
         {
             _context = context;
         }

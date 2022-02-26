@@ -1,4 +1,4 @@
-﻿using Iwentys.EntityManager.DataAccess;
+﻿using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.Dtos;
 using MediatR;
@@ -12,9 +12,9 @@ public static class AddTeacher
 
     public class Handler : IRequestHandler<Command>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IIwentysEntityManagerDbContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IIwentysEntityManagerDbContext context)
         {
             _context = context;
         }

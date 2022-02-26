@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.DataAccess;
+﻿namespace Iwentys.EntityManager.Application.Abstractions;
 
 public interface ISpecification<in T, out TResult>
 {
