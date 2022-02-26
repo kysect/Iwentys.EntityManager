@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Iwentys.EntityManager.Web",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F87A2682-5413-4B84-AF69-53CD59906E86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Application", "Infrastructure\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj", "{34119AE5-D8EC-49C2-B79F-ABCEEB624246}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{4852EE21-7AD5-4EE0-A053-5C861E2A79CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iwentys.EntityManager.Domain", "Domain\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj", "{663D2EEB-463F-4636-93E5-57A48C14CAFB}"
@@ -24,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{5BBDFE78-41B9-47C0-969F-D27CBEB4F97E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.Dtos", "Application\Iwentys.EntityManager.Dtos\Iwentys.EntityManager.Dtos.csproj", "{E2CA4513-A430-4390-89B4-1EF4C347F630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.Application", "Application\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj", "{6C742A13-3CD7-447F-8563-2E038D15D2D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,6 @@ Global
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Release|Any CPU.Build.0 = Release|Any CPU
 		{663D2EEB-463F-4636-93E5-57A48C14CAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{663D2EEB-463F-4636-93E5-57A48C14CAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{663D2EEB-463F-4636-93E5-57A48C14CAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +55,10 @@ Global
 		{E2CA4513-A430-4390-89B4-1EF4C347F630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2CA4513-A430-4390-89B4-1EF4C347F630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2CA4513-A430-4390-89B4-1EF4C347F630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C742A13-3CD7-447F-8563-2E038D15D2D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C742A13-3CD7-447F-8563-2E038D15D2D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C742A13-3CD7-447F-8563-2E038D15D2D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C742A13-3CD7-447F-8563-2E038D15D2D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,9 +68,9 @@ Global
 		{505B36F0-68A8-42AA-B3D6-801C956F1648} = {2A6B8AF2-D3C5-4E08-8793-C2CDC27273E1}
 		{B80719B0-20F7-44AF-886F-D334D174DF3A} = {2A6B8AF2-D3C5-4E08-8793-C2CDC27273E1}
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141} = {F87A2682-5413-4B84-AF69-53CD59906E86}
-		{34119AE5-D8EC-49C2-B79F-ABCEEB624246} = {F87A2682-5413-4B84-AF69-53CD59906E86}
 		{663D2EEB-463F-4636-93E5-57A48C14CAFB} = {4852EE21-7AD5-4EE0-A053-5C861E2A79CF}
 		{E2CA4513-A430-4390-89B4-1EF4C347F630} = {5BBDFE78-41B9-47C0-969F-D27CBEB4F97E}
+		{6C742A13-3CD7-447F-8563-2E038D15D2D0} = {5BBDFE78-41B9-47C0-969F-D27CBEB4F97E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E84320D9-0D3A-4BE6-A11B-466BD2BE3B84}
