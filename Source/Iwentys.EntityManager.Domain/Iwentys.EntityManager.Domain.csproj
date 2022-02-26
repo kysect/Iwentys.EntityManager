@@ -10,8 +10,4 @@
     <None Remove="Iwentys.EntityManager.Domain.csproj.DotSettings" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Iwentys.EntityManager.Common\Iwentys.EntityManager.Common.csproj" />
-  </ItemGroup>
-
 </Project>

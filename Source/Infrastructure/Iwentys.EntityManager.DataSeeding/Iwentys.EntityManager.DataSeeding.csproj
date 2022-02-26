@@ -14,8 +14,4 @@
     <PackageReference Include="Bogus" Version="34.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>

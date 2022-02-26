@@ -16,9 +16,4 @@
     <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Iwentys.EntityManager.Web\Iwentys.EntityManager.Web.Dtos\Iwentys.EntityManager.Web.Dtos.csproj" />
-    <ProjectReference Include="..\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>
