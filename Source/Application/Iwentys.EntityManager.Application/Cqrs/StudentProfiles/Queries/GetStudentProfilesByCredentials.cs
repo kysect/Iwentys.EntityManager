@@ -2,7 +2,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FuzzySharp;
 using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.WebApiDtos;
+using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
