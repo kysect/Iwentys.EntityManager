@@ -1,4 +1,6 @@
-﻿namespace Iwentys.EntityManager.Common;
+﻿using Iwentys.EntityManager.Common;
+
+namespace Iwentys.EntityManager.Application.Abstractions;
 
 public class EntityNotFoundException : IwentysException
 {

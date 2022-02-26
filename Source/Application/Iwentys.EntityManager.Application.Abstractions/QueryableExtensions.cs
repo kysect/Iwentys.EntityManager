@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Iwentys.EntityManager.DataAccess;
+namespace Iwentys.EntityManager.Application.Abstractions;
 
 public static class QueryableExtensions
 {
@@ -14,6 +14,8 @@ public static class QueryableExtensions
 
     public static IQueryable<TResult> Specify<T, TResult>(this IQueryable<T> query, ISpecification<T, TResult> spec) where T : class
     {
+        ArgumentNullException.ThrowIfNull(spec);
+
         return spec.Specify(query);
     }
 }

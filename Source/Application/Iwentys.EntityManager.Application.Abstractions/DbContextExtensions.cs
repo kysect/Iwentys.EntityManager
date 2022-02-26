@@ -1,14 +1,15 @@
 ﻿using System.Linq.Expressions;
-using Iwentys.EntityManager.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Iwentys.EntityManager.DataAccess;
+namespace Iwentys.EntityManager.Application.Abstractions;
 
 public static class DbContextExtensions
 {
     public static async Task<TEntity> GetById<TEntity, TKey>(this DbSet<TEntity> repository, TKey key)
         where TEntity : class
     {
+        ArgumentNullException.ThrowIfNull(repository);
+
         return await repository.FindAsync(key) ?? throw EntityNotFoundException.Create(typeof(TEntity), key);
     }
 
