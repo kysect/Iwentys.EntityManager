@@ -10,6 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Iwentys.EntityManager.Web.Api.csproj.DotSettings" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="AutoMapper" Version="11.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="FuzzySharp" Version="2.0.2" />
@@ -22,6 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj" />
       <ProjectReference Include="..\Iwentys.EntityManager.Web.Dtos\Iwentys.EntityManager.Web.Dtos.csproj" />

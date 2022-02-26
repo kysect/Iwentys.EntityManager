@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Iwentys.EntityManager.Web",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F87A2682-5413-4B84-AF69-53CD59906E86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.Application", "Infrastructure\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj", "{34119AE5-D8EC-49C2-B79F-ABCEEB624246}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34119AE5-D8EC-49C2-B79F-ABCEEB624246}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{B80719B0-20F7-44AF-886F-D334D174DF3A} = {2A6B8AF2-D3C5-4E08-8793-C2CDC27273E1}
 		{0AF6C827-1F01-4964-B8AF-D72BE9A82940} = {2A6B8AF2-D3C5-4E08-8793-C2CDC27273E1}
 		{A891E8AE-60B4-4F68-A0C7-4457CBD29141} = {F87A2682-5413-4B84-AF69-53CD59906E86}
+		{34119AE5-D8EC-49C2-B79F-ABCEEB624246} = {F87A2682-5413-4B84-AF69-53CD59906E86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E84320D9-0D3A-4BE6-A11B-466BD2BE3B84}
