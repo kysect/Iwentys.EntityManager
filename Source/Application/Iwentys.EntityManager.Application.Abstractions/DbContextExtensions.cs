@@ -8,6 +8,8 @@ public static class DbContextExtensions
     public static async Task<TEntity> GetById<TEntity, TKey>(this DbSet<TEntity> repository, TKey key)
         where TEntity : class
     {
+        ArgumentNullException.ThrowIfNull(repository);
+
         return await repository.FindAsync(key) ?? throw EntityNotFoundException.Create(typeof(TEntity), key);
     }
 

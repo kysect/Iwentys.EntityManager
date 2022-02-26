@@ -30,6 +30,8 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        ArgumentNullException.ThrowIfNull(modelBuilder);
+
         modelBuilder.Entity<GroupSubjectTeacher>().HasKey(gsm => new { UserId = gsm.TeacherId, gsm.GroupSubjectId, gsm.TeacherType });
 
         modelBuilder.Entity<GroupSubject>().Navigation(gs => gs.Teachers).HasField("_teachers");
