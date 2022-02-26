@@ -27,7 +27,7 @@ public class IwentysUserProfileController : ControllerBase
     public async Task<ActionResult<IwentysUserDto>> GetById(int id)
     {
         GetIwentysUserById.Response response = await _mediator.Send(new GetIwentysUserById.Query(id));
-        var result = response.User;
+        IwentysUserDto? result = response.User;
 
         return result is not null ? Ok(result) : NotFound();
     }
