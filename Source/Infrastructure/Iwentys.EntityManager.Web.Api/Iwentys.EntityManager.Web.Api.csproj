@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Application\Iwentys.EntityManager.Application\Iwentys.EntityManager.Application.csproj" />
+      <ProjectReference Include="..\..\Presentation\Iwentys.EntityManager.Web.Controllers\Iwentys.EntityManager.Web.Controllers.csproj" />
       <ProjectReference Include="..\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
       <ProjectReference Include="..\Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj" />
     </ItemGroup>

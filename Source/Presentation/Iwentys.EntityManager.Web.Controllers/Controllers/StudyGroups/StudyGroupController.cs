@@ -3,7 +3,7 @@ using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Iwentys.EntityManager.WebApi;
+namespace Iwentys.EntityManager.Web.Controllers;
 
 [Route("api/study-group")]
 [ApiController]
