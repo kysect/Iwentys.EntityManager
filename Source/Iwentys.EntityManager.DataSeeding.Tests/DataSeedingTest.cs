@@ -8,18 +8,24 @@ namespace Iwentys.EntityManager.DataSeeding.Tests;
 
 public class Tests
 {
+    private static readonly ServiceCollection Collection = new ();
+
+    [SetUp]
+    public void AddSeedingServices()
+    {
+        Collection.Clear();
+
+        Collection.AddDbContext<IwentysEntityManagerDbContext>(o
+            => o.UseSqlite("Data Source=Iwentys.db;Cache=Shared;"));
+
+        Collection.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
+        Collection.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
+    }
+
     [Test]
     public void IwentysEntityManagerDbContextSeeding_DoesNotThrowException()
     {
-        var collection = new ServiceCollection(); 
-
-        collection.AddDbContext<IwentysEntityManagerDbContext>(o
-            => o.UseSqlite("Data Source=Iwentys.db;Cache=Shared;"));
-
-        collection.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
-        collection.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
-
-        var context = collection.BuildServiceProvider().GetRequiredService<IwentysEntityManagerDbContext>();
+        var context = Collection.BuildServiceProvider().GetRequiredService<IwentysEntityManagerDbContext>();
 
         Assert.DoesNotThrow(() =>
         {
