@@ -22,9 +22,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Infrastructure\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
-      <ProjectReference Include="..\Infrastructure\Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj" />
-      <ProjectReference Include="..\Infrastructure\Iwentys.EntityManager.Web.Configuration\Iwentys.EntityManager.Web.Configuration.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.DataAccess\Iwentys.EntityManager.DataAccess.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.DataSeeding\Iwentys.EntityManager.DataSeeding.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Iwentys.EntityManager.Web.Configuration\Iwentys.EntityManager.Web.Configuration.csproj" />
     </ItemGroup>
 
 </Project>
