@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.Mappi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DD70EF54-3BEB-4701-9699-1A709842F586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.DataSeeding.Tests", "Iwentys.EntityManager.DataSeeding.Tests\Iwentys.EntityManager.DataSeeding.Tests.csproj", "{CC361A28-4E80-4B3C-8566-EF94DC34CEE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iwentys.EntityManager.DataSeeding.Tests", "Tests\Iwentys.EntityManager.DataSeeding.Tests\Iwentys.EntityManager.DataSeeding.Tests.csproj", "{CC361A28-4E80-4B3C-8566-EF94DC34CEE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
