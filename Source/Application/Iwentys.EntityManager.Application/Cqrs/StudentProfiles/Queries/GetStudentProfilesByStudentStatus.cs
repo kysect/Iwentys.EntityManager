@@ -26,8 +26,8 @@ public static class GetStudentProfilesByStudentStatus
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            List<StudentDto> result = await _context.Students.
-                Where(s => s.StudentStatus.Type == request.StudentStatus)
+            List<StudentDto> result = await _context.Students
+                .Where(s => s.StudentStatus.Type == request.StudentStatus)
                 .ProjectTo<StudentDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken: cancellationToken);
 
