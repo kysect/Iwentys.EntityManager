@@ -1,6 +1,6 @@
-﻿namespace Iwentys.EntityManager.Domain;
+﻿namespace Iwentys.EntityManager.Domain.GithubOrganizations;
 
-public class GithubOrganisation
+public class GithubOrganization : IGithubOrganization
 {
     public string Name { get; set; }
     public string Description { get; set; }

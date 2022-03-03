@@ -1,4 +1,5 @@
 ﻿using Iwentys.EntityManager.Common;
+using Iwentys.EntityManager.Domain.GithubOrganizations;
 
 namespace Iwentys.EntityManager.Domain;
 
@@ -12,7 +13,7 @@ public class GroupSubject
 
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
-
+    public IGithubOrganization GithubOrganization { get; set; }
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
 
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
@@ -20,7 +21,7 @@ public class GroupSubject
         ArgumentNullException.ThrowIfNull(subject);
         ArgumentNullException.ThrowIfNull(studyGroup);
         ArgumentNullException.ThrowIfNull(lecturer);
-        
+
         Subject = subject;
         SubjectId = subject.Id;
         StudyGroup = studyGroup;
@@ -32,7 +33,9 @@ public class GroupSubject
         };
     }
 
-    protected GroupSubject() { }
+    protected GroupSubject()
+    {
+    }
 
     public void AddPracticeTeacher(IwentysUser practiceTeacher)
     {
@@ -42,7 +45,7 @@ public class GroupSubject
     public void AddTeacher(IwentysUser teacher, TeacherType teacherType)
     {
         ArgumentNullException.ThrowIfNull(teacher);
-        
+
         if (!IsUserAlreadyAdded(teacher, teacherType))
         {
             throw new IwentysException("User is already practice teacher");
@@ -61,5 +64,16 @@ public class GroupSubject
     {
         ArgumentNullException.ThrowIfNull(user);
         return Teachers.Any(t => t.TeacherId == user.Id);
+    }
+
+    public void SetGithubOrganization(GithubOrganization githubOrganization)
+    {
+        ArgumentNullException.ThrowIfNull(githubOrganization);
+        GithubOrganization = githubOrganization;
+    }
+
+    public void RemoveGithubOrganization()
+    {
+        GithubOrganization = new NoGithubOrganization();
     }
 }
