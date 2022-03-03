@@ -2,14 +2,14 @@
 
 public class StudentStatus
 {
-    public StudentStatus(StudentStatusType status, DateTime statusStart)
+    public StudentStatus(StudentStatusType type, DateTime modifyDate)
     {
-        Status = status;
-        StatusStart = statusStart;
+        Type = type;
+        ModifyDate = modifyDate;
         Id = Guid.NewGuid();
     }
 
     public Guid Id { get; set; }
-    public StudentStatusType Status { get; set; }
-    public DateTime StatusStart { get; set; }
+    public StudentStatusType Type { get; set; }
+    public DateTime ModifyDate { get; set; }
 }
