@@ -1,3 +1,3 @@
 ﻿namespace Iwentys.EntityManager.Dtos.ValueObjects;
 
-public record StudentStatusDto(StudentStatusTypeDto Type, DateTime ModifyDate);
+public record StudentStatusDto(StudentStatusTypeDto Type, DateTime ModifiedDate);

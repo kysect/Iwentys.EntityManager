@@ -5,12 +5,12 @@ namespace Iwentys.EntityManager.Domain;
 [Owned]
 public class StudentStatus
 {
-    public StudentStatus(StudentStatusType type, DateTime modifyDate)
+    public StudentStatus(StudentStatusType type, DateTime modifiedDate)
     {
         Type = type;
-        ModifyDate = modifyDate;
+        ModifiedDate = modifiedDate;
     }
     
     public StudentStatusType Type { get; set; }
-    public DateTime ModifyDate { get; set; }
+    public DateTime ModifiedDate { get; set; }
 }
