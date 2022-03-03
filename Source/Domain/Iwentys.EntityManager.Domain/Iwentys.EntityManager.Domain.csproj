@@ -10,4 +10,8 @@
     <None Remove="Iwentys.EntityManager.Domain.csproj.DotSettings" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.2" />
+  </ItemGroup>
+
 </Project>

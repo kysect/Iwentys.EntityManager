@@ -1,15 +1,16 @@
-﻿namespace Iwentys.EntityManager.Domain;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace Iwentys.EntityManager.Domain;
+
+[Owned]
 public class StudentStatus
 {
     public StudentStatus(StudentStatusType type, DateTime modifyDate)
     {
         Type = type;
         ModifyDate = modifyDate;
-        Id = Guid.NewGuid();
     }
-
-    public Guid Id { get; set; }
+    
     public StudentStatusType Type { get; set; }
     public DateTime ModifyDate { get; set; }
 }
