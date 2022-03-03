@@ -14,5 +14,4 @@ public record StudentDto(
         string AvatarUrl,
         StudentType Type,
         int? GroupId,
-        StudentStatusType StudentStatus,
-        DateTime StatusStart);
+        StudentStatus StudentStatus);
