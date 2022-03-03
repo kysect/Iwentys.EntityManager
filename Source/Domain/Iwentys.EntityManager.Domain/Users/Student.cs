@@ -12,7 +12,8 @@ public class Student : IwentysUser
         DateTime lastOnlineTime,
         string avatarUrl,
         StudyGroup studyGroup,
-        StudentType studentType)
+        StudentType studentType,
+        StudentStatus studentStatus)
         : base(firstName, middleName, lastName, isAdmin, githubUsername, creationTime, lastOnlineTime, avatarUrl)
     {
         ArgumentNullException.ThrowIfNull(studyGroup);
@@ -20,6 +21,7 @@ public class Student : IwentysUser
         Type = studentType;
         Group = studyGroup;
         GroupId = studyGroup.Id;
+        StudentStatus = studentStatus;
     }
 
     protected Student() { }
@@ -27,4 +29,5 @@ public class Student : IwentysUser
     public StudentType Type { get; init; }
     public int? GroupId { get; set; }
     public virtual StudyGroup Group { get; set; }
+    public virtual StudentStatus StudentStatus { get; set; }
 }

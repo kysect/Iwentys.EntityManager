@@ -13,4 +13,6 @@ public record StudentDto(
         DateTime LastOnlineTime,
         string AvatarUrl,
         StudentType Type,
-        int? GroupId);
+        int? GroupId,
+        StudentStatusType StudentStatus,
+        DateTime StatusStart);
