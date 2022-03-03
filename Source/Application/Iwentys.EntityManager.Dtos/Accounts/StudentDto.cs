@@ -15,4 +15,4 @@ public record StudentDto(
         string AvatarUrl,
         StudentType Type,
         int? GroupId,
-        StudentStatusDto StudentStatusDto);
+        StudentStatusDto StudentStatus);

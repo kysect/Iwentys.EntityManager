@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.Dtos;
+using Iwentys.EntityManager.Dtos.ValueObjects;
 
 namespace Iwentys.EntityManager.Application;
 
@@ -11,6 +12,7 @@ public class EntityManagerMappingProfile : Profile
         CreateMap<UniversitySystemUser, UniversitySystemUserDto>();
         CreateMap<IwentysUser, IwentysUserDto>();
         CreateMap<Student, StudentDto>();
+        CreateMap<StudentStatus, StudentStatusDto>();
 
         CreateMap<Subject, SubjectDto>();
         CreateMap<StudyGroup, StudyGroupInnerDto>();
