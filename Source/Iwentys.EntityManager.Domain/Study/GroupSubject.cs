@@ -13,7 +13,7 @@ public class GroupSubject
 
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
-    public IGithubOrganization GithubOrganization { get; set; }
+    public GithubOrganization GithubOrganization { get; set; }
     public virtual List<GroupSubjectTeacher> Teachers { get; init; }
 
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)
