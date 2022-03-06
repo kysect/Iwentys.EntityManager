@@ -1,4 +1,5 @@
 ﻿using Iwentys.EntityManager.Domain;
+using Iwentys.EntityManager.Dtos.ValueObjects;
 
 namespace Iwentys.EntityManager.Dtos;
 
@@ -13,4 +14,5 @@ public record StudentDto(
         DateTime LastOnlineTime,
         string AvatarUrl,
         StudentType Type,
-        int? GroupId);
+        int? GroupId,
+        StudentStatusDto StudentStatus);

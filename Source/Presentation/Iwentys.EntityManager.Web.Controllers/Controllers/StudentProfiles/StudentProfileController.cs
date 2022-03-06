@@ -1,4 +1,5 @@
 ﻿using Iwentys.EntityManager.Application;
+using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +81,15 @@ public class StudentProfileController : ControllerBase
         string credentials)
     {
         GetStudentProfilesByCredentials.Response response = await _mediator.Send(new GetStudentProfilesByCredentials.Query(credentials));
+
+        return Ok(response.Students);
+    }
+    
+    [HttpGet(nameof(GetStudentProfilesByStudentStatus))]
+    public async Task<ActionResult<IReadOnlyCollection<StudentDto>>> GetStudentProfilesByStudentStatus(
+        StudentStatusType studentStatus)
+    {
+        GetStudentProfilesByStudentStatus.Response response = await _mediator.Send(new GetStudentProfilesByStudentStatus.Query(studentStatus));
 
         return Ok(response.Students);
     }
