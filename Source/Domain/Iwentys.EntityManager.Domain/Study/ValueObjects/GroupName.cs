@@ -1,7 +1,14 @@
-﻿namespace Iwentys.EntityManager.Domain;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace Iwentys.EntityManager.Domain;
+
+[Owned]
 public class GroupName
 {
+    protected GroupName()
+    {
+    }
+
     public GroupName(string name)
     {
         //FYI: russian letter

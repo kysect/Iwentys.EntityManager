@@ -20,7 +20,7 @@ public class StudyGroupGenerator : IDbContextSeeder
         }
 
         StudyGroup frediGroup = studyGroupFaker.Generate();
-        frediGroup.GroupName = new GroupName("M3505").Name;
+        frediGroup.GroupName = new GroupName("M3505");
         groups.Add(frediGroup);
 
         StudyGroups = groups.ToArray();
@@ -30,6 +30,6 @@ public class StudyGroupGenerator : IDbContextSeeder
 
     public void Seed(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<StudyGroup>().HasData(StudyGroups);
+        // TODO: Надо бы переделать seed, чтобы он работал не с modelBuilder, а с DBContext, чтобы не было проблем с owned типами
     }
 }
