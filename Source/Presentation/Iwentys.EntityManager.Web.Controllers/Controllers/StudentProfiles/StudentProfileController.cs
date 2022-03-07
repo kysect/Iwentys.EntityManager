@@ -42,7 +42,7 @@ public class StudentProfileController : ControllerBase
         return result is not null ? Ok(result) : NotFound();
     }
 
-    [HttpPost(nameof(GetStudentProfilesByIdList))]
+    [HttpGet(nameof(GetStudentProfilesByIdList))]
     public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> GetStudentProfilesByIdList(
         List<int> studentIdList)
     {
@@ -51,7 +51,7 @@ public class StudentProfileController : ControllerBase
         return Ok(response.Students);
     }
 
-    [HttpPost(nameof(GetStudentProfilesByGithubUsernamesList))]
+    [HttpGet(nameof(GetStudentProfilesByGithubUsernamesList))]
     public async Task<ActionResult<IReadOnlyCollection<StudentDto>>> GetStudentProfilesByGithubUsernamesList(
         List<string> githubUsernamesList)
     {

@@ -45,14 +45,14 @@ public class TeacherController : ControllerBase
         return Ok();
     }
 
-    [HttpPost(nameof(GetUserTeacherTypeForSubject))]
+    [HttpGet(nameof(GetUserTeacherTypeForSubject))]
     public async Task<ActionResult<TeacherType>> GetUserTeacherTypeForSubject(int userId, int subjectId)
     {
         GetUserTeacherTypeForSubject.Response response = await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
         return Ok(response.TeacherType);
     }
 
-    [HttpPost(nameof(IsUserHasTeacherPermissionForSubject))]
+    [HttpGet(nameof(IsUserHasTeacherPermissionForSubject))]
     public async Task<ActionResult<bool>> IsUserHasTeacherPermissionForSubject(int userId, int subjectId)
     {
         GetUserTeacherTypeForSubject.Response response = await _mediator.Send(new GetUserTeacherTypeForSubject.Query(userId, subjectId));
