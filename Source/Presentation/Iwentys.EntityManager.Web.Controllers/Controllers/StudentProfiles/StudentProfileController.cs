@@ -44,7 +44,7 @@ public class StudentProfileController : ControllerBase
 
     [HttpGet(nameof(GetStudentProfilesByIdList))]
     public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> GetStudentProfilesByIdList(
-        [FromQuery] List<int> studentIdList)
+        [FromQuery] IReadOnlyList<int> studentIdList)
     {
         GetStudentProfilesByIdList.Response response = await _mediator.Send(new GetStudentProfilesByIdList.Query(studentIdList));
 
@@ -53,7 +53,7 @@ public class StudentProfileController : ControllerBase
 
     [HttpGet(nameof(GetStudentProfilesByGithubUsernamesList))]
     public async Task<ActionResult<IReadOnlyCollection<StudentDto>>> GetStudentProfilesByGithubUsernamesList(
-        [FromQuery] List<string> githubUsernamesList)
+        [FromQuery] IReadOnlyList<string> githubUsernamesList)
     {
         GetStudentProfilesByGithubUsernamesList.Response response = await _mediator.Send(new GetStudentProfilesByGithubUsernamesList.Query(githubUsernamesList));
 
