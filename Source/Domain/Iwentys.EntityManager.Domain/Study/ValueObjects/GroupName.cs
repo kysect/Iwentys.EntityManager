@@ -2,7 +2,6 @@
 
 namespace Iwentys.EntityManager.Domain;
 
-[Owned]
 public class GroupName
 {
     protected GroupName()
