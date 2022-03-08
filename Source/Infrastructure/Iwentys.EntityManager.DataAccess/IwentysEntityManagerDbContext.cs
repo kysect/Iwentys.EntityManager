@@ -19,6 +19,7 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
     public DbSet<GroupSubject> GroupSubjects { get; set; } = null!;
     public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; } = null!;
     public DbSet<StudyCourse> StudyCourses { get; set; } = null!;
+    public DbSet<GithubOrganization?> GithubOrganizations { get; set; } = null!;
 
     public IwentysEntityManagerDbContext(
         DbContextOptions<IwentysEntityManagerDbContext> options,
@@ -38,6 +39,7 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
         modelBuilder.Entity<GroupSubject>().HasMany(gs => gs.Teachers).WithOne(t => t.GroupSubject);
         modelBuilder.Entity<StudyGroup>().Navigation(sg => sg.Students).HasField("_students");
         modelBuilder.Entity<StudyGroup>().HasMany(sg => sg.Students).WithOne(s => s.Group);
+        modelBuilder.Entity<GithubOrganization>().OwnsOne(go => go.Name);
         modelBuilder.Entity<Subject>().Navigation(s => s.GroupSubjects).HasField("_groupSubjects");
         modelBuilder.Entity<Subject>().HasMany(s => s.GroupSubjects).WithOne(gs => gs.Subject);
 

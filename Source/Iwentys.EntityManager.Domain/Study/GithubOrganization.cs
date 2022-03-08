@@ -1,4 +1,4 @@
-﻿namespace Iwentys.EntityManager.Domain.GithubOrganizations;
+﻿namespace Iwentys.EntityManager.Domain;
 
 public class GithubOrganization
 {

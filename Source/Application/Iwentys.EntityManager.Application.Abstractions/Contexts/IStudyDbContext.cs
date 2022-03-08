@@ -12,4 +12,5 @@ public interface IStudyDbContext
     public DbSet<GroupSubject> GroupSubjects { get; set; }
     public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; }
     public DbSet<StudyCourse> StudyCourses { get; set; }
+    public DbSet<GithubOrganization?> GithubOrganizations { get; set; }
 }
