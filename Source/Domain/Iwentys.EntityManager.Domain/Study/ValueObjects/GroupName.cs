@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Iwentys.EntityManager.Domain;
+﻿namespace Iwentys.EntityManager.Domain;
 
 public class GroupName
 {
