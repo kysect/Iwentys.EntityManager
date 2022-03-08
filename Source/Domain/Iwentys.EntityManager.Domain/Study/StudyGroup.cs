@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Iwentys.EntityManager.Common;
+﻿using Iwentys.EntityManager.Common;
 
 namespace Iwentys.EntityManager.Domain;
 

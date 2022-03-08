@@ -1,10 +1,8 @@
-﻿using Iwentys.EntityManager.Dtos.ValueObjects;
-
-namespace Iwentys.EntityManager.Dtos;
+﻿namespace Iwentys.EntityManager.Dtos;
 
 public record StudyGroupDto(
     int Id,
-    GroupNameDto GroupName,
+    string GroupName,
     int? GroupAdminId,
     List<StudentDto> Students,
     List<SubjectDto> Subjects)

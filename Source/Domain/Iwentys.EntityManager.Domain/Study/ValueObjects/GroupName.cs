@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Iwentys.EntityManager.Domain;
 
-namespace Iwentys.EntityManager.Domain;
-
-[Owned]
 public class GroupName
 {
     protected GroupName()
