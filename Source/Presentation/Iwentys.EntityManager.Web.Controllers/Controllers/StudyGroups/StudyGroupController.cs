@@ -50,9 +50,9 @@ public class StudyGroupController : ControllerBase
         return result is not null ? Ok(result) : NotFound();
     }
 
-    [HttpPost(nameof(GetStudyGroupsByIdList))]
+    [HttpGet(nameof(GetStudyGroupsByIdList))]
     public async Task<ActionResult<IReadOnlyCollection<StudyGroupDto>>> GetStudyGroupsByIdList(
-        List<int> groupIdList)
+        [FromQuery] IReadOnlyList<int> groupIdList)
     {
         GetStudyGroupsByIdList.Response response = await _mediator.Send(new GetStudyGroupsByIdList.Query(groupIdList));
         return Ok(response.StudyGroups);

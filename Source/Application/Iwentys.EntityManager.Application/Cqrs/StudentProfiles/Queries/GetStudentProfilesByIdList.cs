@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.Application;
 
 public static class GetStudentProfilesByIdList
 {
-    public record Query(List<int> StudentIdList) : IRequest<Response>;
+    public record Query(IReadOnlyList<int> StudentIdList) : IRequest<Response>;
     public record Response(IReadOnlyCollection<StudentDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>
