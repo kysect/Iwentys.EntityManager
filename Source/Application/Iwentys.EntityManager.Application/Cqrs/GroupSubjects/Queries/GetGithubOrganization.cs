@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Iwentys.EntityManager.Application.Abstractions;
-using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +9,7 @@ namespace Iwentys.EntityManager.Application;
 public class GetGithubOrganization
 {
     public record Query(int? GithubOrganizationId) : IRequest<Response>;
-    public record Response(GithubOrganization? GithubOrganization);
+    public record Response(GithubOrganizationDto? GithubOrganization);
 
     public class Handler : IRequestHandler<Query, Response>
     {
@@ -26,9 +24,9 @@ public class GetGithubOrganization
 
         public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
         {
-            GithubOrganization? result = await _context
-                .GithubOrganizations
-                .FirstOrDefaultAsync(x => x.Id == request.GithubOrganizationId, cancellationToken);
+            var result = await _mapper
+                .ProjectTo<GithubOrganizationDto>(_context.GithubOrganizations)
+                .SingleOrDefaultAsync(x => x.Id == request.GithubOrganizationId, cancellationToken);
 
             return new Response(result);
         }
