@@ -14,7 +14,7 @@ public class GroupSubject
 
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
-    public virtual GithubOrganization GithubOrganization { get; set; }
+    public virtual GithubOrganization? GithubOrganization { get; private set; }
     public virtual IReadOnlyList<GroupSubjectTeacher> Teachers => _teachers.AsReadOnly();
 
     public GroupSubject(Subject subject, StudyGroup studyGroup, StudySemester studySemester, IwentysUser lecturer)

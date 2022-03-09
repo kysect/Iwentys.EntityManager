@@ -23,12 +23,4 @@ public class GroupSubjectController : ControllerBase
         GetGroupSubjectByTeacherId.Response response = await _mediator.Send(new GetGroupSubjectByTeacherId.Query(teacherId));
         return Ok(response.Groups);
     }
-    
-    [HttpGet(nameof(GetGithubOrganization))]
-    public async Task<ActionResult<GithubOrganization>> GetGithubOrganization(int githubOrganizationId)
-    {
-        GetGithubOrganization.Response response = await _mediator.Send(new GetGithubOrganization.Query(githubOrganizationId));
-        return Ok(response.GithubOrganization);
-    }
-    
 }
