@@ -14,17 +14,8 @@ public class GroupSubject
 
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
-    private GithubOrganization _githubOrganization;
 
-    public virtual GithubOrganization? GithubOrganization
-    {
-        get => _githubOrganization;
-        private set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            _githubOrganization = value;
-        }
-    }
+    public virtual GithubOrganization? GithubOrganization { get; private set; }
 
     public virtual IReadOnlyList<GroupSubjectTeacher> Teachers => _teachers.AsReadOnly();
 
@@ -78,7 +69,7 @@ public class GroupSubject
         return _teachers.Any(t => t.TeacherId == user.Id);
     }
 
-    public void SetGithubOrganization(GithubOrganization githubOrganization)
+    public void UpdateGithubOrganization(GithubOrganization githubOrganization)
     {
         ArgumentNullException.ThrowIfNull(githubOrganization);
         GithubOrganization = githubOrganization;
@@ -86,6 +77,6 @@ public class GroupSubject
 
     public void RemoveGithubOrganization()
     {
-        _githubOrganization = null;
+        GithubOrganization = null;
     }
 }
