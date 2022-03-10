@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
@@ -30,9 +29,10 @@ public class SubjectGroupSubjectGenerator : IDbContextSeeder
     public Subject[] Subjects { get; }
     public GroupSubject[] GroupSubjects { get; }
 
-    public void Seed(ModelBuilder modelBuilder)
+    public void Seed(IwentysEntityManagerDbContext context)
     {
-        modelBuilder.Entity<Subject>().HasData(Subjects);
-        modelBuilder.Entity<GroupSubject>().HasData(GroupSubjects);
+        context.Subjects.AddRange(Subjects);
+        context.GroupSubjects.AddRange(GroupSubjects);
+        context.SaveChanges();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
@@ -20,8 +19,9 @@ public class GroupSubjectTeacherGenerator : IDbContextSeeder
 
     public GroupSubjectTeacher[] GroupSubjectTeachers { get; }
 
-    public void Seed(ModelBuilder modelBuilder)
+    public void Seed(IwentysEntityManagerDbContext context)
     {
-        modelBuilder.Entity<GroupSubjectTeacher>().HasData(GroupSubjectTeachers);
+        context.GroupSubjectTeacher.AddRange(GroupSubjectTeachers);
+        context.SaveChanges();
     }
 }

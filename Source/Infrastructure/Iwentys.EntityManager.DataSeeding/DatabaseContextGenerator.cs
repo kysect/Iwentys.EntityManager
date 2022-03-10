@@ -1,5 +1,4 @@
 ﻿using Iwentys.EntityManager.DataAccess;
-using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
@@ -16,9 +15,10 @@ public class DatabaseContextGenerator : IDbContextSeeder
         StudyGroupGenerator studyGroupGenerator = Register(new StudyGroupGenerator(new StudyGroupFaker(studyProgramCourseGenerator), studyProgramCourseGenerator));
     }
 
-    public void Seed(ModelBuilder modelBuilder)
+    public void Seed(IwentysEntityManagerDbContext context)
     {
-        _generators.ForEach(eg => eg.Seed(modelBuilder));
+        _generators.ForEach(eg => eg.Seed(context));
+        context.SaveChanges();
     }
 
     private T Register<T>(T entityGenerator) where T : IDbContextSeeder

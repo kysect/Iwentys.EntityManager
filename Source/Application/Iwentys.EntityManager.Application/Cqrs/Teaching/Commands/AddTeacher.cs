@@ -12,9 +12,9 @@ public static class AddTeacher
 
     public class Handler : IRequestHandler<Command>
     {
-        private readonly IIwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDbContext _context;
 
-        public Handler(IIwentysEntityManagerDbContext context)
+        public Handler(IwentysEntityManagerDbContext context)
         {
             _context = context;
         }

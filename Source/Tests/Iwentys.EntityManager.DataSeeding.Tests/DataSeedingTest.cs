@@ -1,8 +1,8 @@
-using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using IwentysEntityManagerDbContext = Iwentys.EntityManager.Application.Abstractions.IwentysEntityManagerDbContext;
 
 namespace Iwentys.EntityManager.DataSeeding.Tests;
 
@@ -15,17 +15,17 @@ public class Tests
     {
         Collection.Clear();
 
-        Collection.AddDbContext<IwentysEntityManagerDbContext>(o
+        Collection.AddDbContext<DataAccess.IwentysEntityManagerDbContext>(o
             => o.UseSqlite("Data Source=Iwentys.db;Cache=Shared;"));
 
-        Collection.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
+        Collection.AddScoped<IwentysEntityManagerDbContext, DataAccess.IwentysEntityManagerDbContext>();
         Collection.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
     }
 
     [Test]
     public void IwentysEntityManagerDbContextSeeding_DoesNotThrowException()
     {
-        var context = Collection.BuildServiceProvider().GetRequiredService<IwentysEntityManagerDbContext>();
+        var context = Collection.BuildServiceProvider().GetRequiredService<DataAccess.IwentysEntityManagerDbContext>();
 
         Assert.DoesNotThrow(() =>
         {

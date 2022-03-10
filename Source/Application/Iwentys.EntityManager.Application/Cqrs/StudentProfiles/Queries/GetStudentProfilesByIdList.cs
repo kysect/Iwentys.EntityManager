@@ -14,10 +14,10 @@ public static class GetStudentProfilesByIdList
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IIwentysEntityManagerDbContext _context;
+        private readonly IwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IIwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
