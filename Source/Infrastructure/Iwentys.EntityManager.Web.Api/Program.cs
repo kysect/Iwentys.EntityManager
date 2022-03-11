@@ -18,9 +18,10 @@ builder.Services.AddEntityManagerDatabaseContext();
 builder.Services.InjectEntityManagerLibraries();
 
 var provider = builder.Services.BuildServiceProvider();
-provider
-    .GetRequiredService<DatabaseContextGenerator>()
-    .Seed(provider.GetRequiredService<IwentysEntityManagerDbContext>());
+var generator = provider.GetRequiredService<DatabaseContextGenerator>();
+using (var context = provider.GetRequiredService<IwentysEntityManagerDbContext>()) {
+    generator.Seed(context);
+}
 
 WebApplication app = builder.Build();
 

@@ -17,7 +17,7 @@ public static class DatabaseConfigurator
         service
             .AddDbContext<DataAccess.IwentysEntityManagerDbContext>(o => o
                 .UseLazyLoadingProxies()
-                .UseInMemoryDatabase("InMemoryIwentysEntityManager.db")
+                .UseSqlite("Filename=InMemoryIwentysEntityManager.db")
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
 

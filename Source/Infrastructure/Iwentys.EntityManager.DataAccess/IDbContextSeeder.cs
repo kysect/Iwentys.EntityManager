@@ -1,5 +1,6 @@
 ﻿namespace Iwentys.EntityManager.DataAccess;
 
+
 public interface IDbContextSeeder
 {
     void Seed(IwentysEntityManagerDbContext context);

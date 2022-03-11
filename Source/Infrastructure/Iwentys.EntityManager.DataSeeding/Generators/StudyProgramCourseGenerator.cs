@@ -36,6 +36,5 @@ public class StudyProgramCourseGenerator : IDbContextSeeder
     {
         context.StudyPrograms.AddRange(StudyPrograms);
         context.StudyCourses.AddRange(StudyCourses);
-        context.SaveChanges();
     }
 }

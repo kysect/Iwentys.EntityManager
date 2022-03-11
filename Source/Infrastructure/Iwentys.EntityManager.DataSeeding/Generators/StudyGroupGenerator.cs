@@ -30,6 +30,5 @@ public class StudyGroupGenerator : IDbContextSeeder
     public void Seed(IwentysEntityManagerDbContext context)
     {
         context.StudyGroups.AddRange(StudyGroups);
-        context.SaveChanges();
     }
 }

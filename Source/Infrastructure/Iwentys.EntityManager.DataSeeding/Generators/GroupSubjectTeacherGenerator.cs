@@ -22,6 +22,5 @@ public class GroupSubjectTeacherGenerator : IDbContextSeeder
     public void Seed(IwentysEntityManagerDbContext context)
     {
         context.GroupSubjectTeacher.AddRange(GroupSubjectTeachers);
-        context.SaveChanges();
     }
 }

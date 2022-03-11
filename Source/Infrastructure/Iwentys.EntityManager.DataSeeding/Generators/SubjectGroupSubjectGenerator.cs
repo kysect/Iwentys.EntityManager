@@ -33,6 +33,5 @@ public class SubjectGroupSubjectGenerator : IDbContextSeeder
     {
         context.Subjects.AddRange(Subjects);
         context.GroupSubjects.AddRange(GroupSubjects);
-        context.SaveChanges();
     }
 }

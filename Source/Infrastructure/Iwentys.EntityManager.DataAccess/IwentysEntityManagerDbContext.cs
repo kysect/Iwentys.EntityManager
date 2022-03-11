@@ -22,6 +22,7 @@ public class IwentysEntityManagerDbContext : DbContext, Application.Abstractions
         IDbContextSeeder dbContextSeeder)
         : base(options)
     {
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
