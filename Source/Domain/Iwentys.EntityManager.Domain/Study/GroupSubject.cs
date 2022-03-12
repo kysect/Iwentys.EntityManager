@@ -15,7 +15,7 @@ public class GroupSubject
     public int StudyGroupId { get; init; }
     public virtual StudyGroup StudyGroup { get; init; }
 
-    public virtual string GithubOrganization { get; private set; }
+    public virtual GithubOrganization? GithubOrganization { get; private set; }
 
     public virtual IReadOnlyList<GroupSubjectTeacher> Teachers => _teachers.AsReadOnly();
 
@@ -69,7 +69,7 @@ public class GroupSubject
         return _teachers.Any(t => t.TeacherId == user.Id);
     }
 
-    public void UpdateGithubOrganization(string githubOrganization)
+    public void UpdateGithubOrganization(GithubOrganization githubOrganization)
     {
         ArgumentNullException.ThrowIfNull(githubOrganization);
         GithubOrganization = githubOrganization;

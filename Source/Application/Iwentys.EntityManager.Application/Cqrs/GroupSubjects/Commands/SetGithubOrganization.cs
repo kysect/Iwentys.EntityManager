@@ -1,4 +1,5 @@
 ﻿using Iwentys.EntityManager.Application.Abstractions;
+using Iwentys.EntityManager.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ public static class SetGithubOrganization
         {
             var groupSubject = await _context.GroupSubjects.FirstAsync(gs => gs.Id == request.GroupSubjectId);
 
-            groupSubject.UpdateGithubOrganization(request.GithubOrganization);
+            groupSubject.UpdateGithubOrganization(new GithubOrganization(request.GithubOrganization));
             _context.GroupSubjects.Update(groupSubject);
 
             await _context.SaveChangesAsync(cancellationToken);
