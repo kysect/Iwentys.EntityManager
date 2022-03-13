@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Iwentys.EntityManager.DataAccess;
-using Iwentys.EntityManager.Domain;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
@@ -15,7 +14,6 @@ public class DatabaseContextGenerator : IDbContextSeeder
         StudyProgramFaker studyProgramFaker = new StudyProgramFaker();
         StudyProgramCourseGenerator studyProgramCourseGenerator = Register(new StudyProgramCourseGenerator(studyProgramFaker));
         StudyGroupGenerator studyGroupGenerator = Register(new StudyGroupGenerator(new StudyGroupFaker(studyProgramCourseGenerator), studyProgramCourseGenerator));
-        SubjectGenerator subjectGenerator = Register(new SubjectGenerator(new SubjectFaker()));
     }
 
     public void Seed(IwentysEntityManagerDbContext context)

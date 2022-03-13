@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataAccess;
 
-public class IwentysEntityManagerDbContext : DbContext, Application.Abstractions.IwentysEntityManagerDbContext
+public class IwentysEntityManagerDbContext : DbContext, Application.Abstractions.IIwentysEntityManagerDbContext
 {
     public DbSet<IwentysUser> IwentysUsers { get; set; } = null!;
     public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; } = null!;

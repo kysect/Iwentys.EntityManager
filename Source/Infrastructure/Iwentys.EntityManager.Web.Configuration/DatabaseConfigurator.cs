@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using IwentysEntityManagerDbContext = Iwentys.EntityManager.Application.Abstractions.IwentysEntityManagerDbContext;
+using IwentysEntityManagerDbContext = Iwentys.EntityManager.Application.Abstractions.IIwentysEntityManagerDbContext;
 
 namespace Iwentys.EntityManager.Web.Configuration;
 
@@ -22,7 +22,7 @@ public static class DatabaseConfigurator
                 .EnableDetailedErrors());
 
         service.AddScoped<DbContext, DataAccess.IwentysEntityManagerDbContext>();
-        service.AddScoped<IwentysEntityManagerDbContext, DataAccess.IwentysEntityManagerDbContext>();
+        service.AddScoped<IIwentysEntityManagerDbContext, DataAccess.IwentysEntityManagerDbContext>();
         service.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
         service.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
     }

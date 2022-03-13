@@ -17,12 +17,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEntityManagerDatabaseContext();
 builder.Services.InjectEntityManagerLibraries();
 
-var provider = builder.Services.BuildServiceProvider();
-var generator = provider.GetRequiredService<DatabaseContextGenerator>();
-using (var context = provider.GetRequiredService<IwentysEntityManagerDbContext>()) {
-    generator.Seed(context);
-}
-
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -30,6 +24,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.RecreateEntityManagerDatabase();
+}
+
+var provider = builder.Services.BuildServiceProvider();
+var generator = provider.GetRequiredService<DatabaseContextGenerator>();
+using (var context = provider.GetRequiredService<IwentysEntityManagerDbContext>()) {
+    generator.Seed(context);
 }
 
 app.UseHttpsRedirection();

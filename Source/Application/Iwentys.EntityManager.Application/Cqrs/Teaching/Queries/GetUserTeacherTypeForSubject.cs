@@ -12,9 +12,9 @@ public class GetUserTeacherTypeForSubject
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IIwentysEntityManagerDbContext _context;
 
-        public Handler(IwentysEntityManagerDbContext context)
+        public Handler(IIwentysEntityManagerDbContext context)
         {
             _context = context;
         }

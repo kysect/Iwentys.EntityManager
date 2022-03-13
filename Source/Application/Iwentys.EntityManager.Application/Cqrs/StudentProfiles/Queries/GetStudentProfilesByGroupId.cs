@@ -13,10 +13,10 @@ public static class GetStudentProfilesByGroupId
 
     public class Handler : IRequestHandler<Query, Response>
     {
-        private readonly IwentysEntityManagerDbContext _context;
+        private readonly IIwentysEntityManagerDbContext _context;
         private readonly IMapper _mapper;
 
-        public Handler(IwentysEntityManagerDbContext context, IMapper mapper)
+        public Handler(IIwentysEntityManagerDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

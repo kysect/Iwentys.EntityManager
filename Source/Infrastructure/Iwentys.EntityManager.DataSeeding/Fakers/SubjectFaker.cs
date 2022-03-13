@@ -9,7 +9,7 @@ public class SubjectFaker : Faker<Subject>
 
     public SubjectFaker()
     {
-        CustomInstantiator(faker => new Subject(faker.Hacker.Noun()));
         RuleFor(t => t.Id, f => f.IndexFaker + 1);
+        RuleFor(t => t.Title, f => f.Hacker.Noun());
     }
 }
