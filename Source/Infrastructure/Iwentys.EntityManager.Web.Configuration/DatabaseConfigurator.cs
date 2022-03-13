@@ -6,7 +6,6 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using IwentysEntityManagerDbContext = Iwentys.EntityManager.Application.Abstractions.IIwentysEntityManagerDbContext;
 
 namespace Iwentys.EntityManager.Web.Configuration;
 
@@ -15,14 +14,14 @@ public static class DatabaseConfigurator
     public static void AddEntityManagerDatabaseContext(this IServiceCollection service)
     {
         service
-            .AddDbContext<DataAccess.IwentysEntityManagerDbContext>(o => o
+            .AddDbContext<IwentysEntityManagerDbContext>(o => o
                 .UseLazyLoadingProxies()
-                .UseSqlite("Filename=InMemoryIwentysEntityManager.db")
+                .UseInMemoryDatabase("InMemoryIwentysEntityManager.db")
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
 
-        service.AddScoped<DbContext, DataAccess.IwentysEntityManagerDbContext>();
-        service.AddScoped<IIwentysEntityManagerDbContext, DataAccess.IwentysEntityManagerDbContext>();
+        service.AddScoped<DbContext, IwentysEntityManagerDbContext>();
+        service.AddScoped<IIwentysEntityManagerDbContext, IwentysEntityManagerDbContext>();
         service.AddScoped<IDbContextSeeder, DatabaseContextGenerator>();
         service.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionPipeline<,>));
     }
@@ -31,7 +30,7 @@ public static class DatabaseConfigurator
     {
         using IServiceScope serviceScope = app.Services.CreateScope();
 
-        var context = serviceScope.ServiceProvider.GetRequiredService<DataAccess.IwentysEntityManagerDbContext>();
+        var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
     }
