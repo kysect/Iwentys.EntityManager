@@ -25,7 +25,7 @@ public class GroupSubjectController : ControllerBase
     }
     
     [HttpPost(nameof(SetGithubOrganization))]
-    public async Task<ActionResult> SetGithubOrganization([FromBody] int groupSubjectId, string githubOrganization)
+    public async Task<ActionResult> SetGithubOrganization([FromQuery] int groupSubjectId, string githubOrganization)
     {
         await _mediator.Send(new SetGithubOrganization.Command(groupSubjectId, githubOrganization));
         return Ok();
