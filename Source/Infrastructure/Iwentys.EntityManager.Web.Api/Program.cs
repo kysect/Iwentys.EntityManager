@@ -26,12 +26,6 @@ if (app.Environment.IsDevelopment())
     app.RecreateEntityManagerDatabase();
 }
 
-var provider = builder.Services.BuildServiceProvider();
-var generator = provider.GetRequiredService<DatabaseContextGenerator>();
-using (var context = provider.GetRequiredService<IwentysEntityManagerDbContext>()) {
-    generator.Seed(context);
-}
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

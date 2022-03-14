@@ -1,10 +1,11 @@
-﻿using Iwentys.EntityManager.Domain;
+﻿using Iwentys.EntityManager.Application.Abstractions;
+using Iwentys.EntityManager.Domain;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataAccess;
 
-public class IwentysEntityManagerDbContext : DbContext, Application.Abstractions.IIwentysEntityManagerDbContext
+public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbContext
 {
     public DbSet<IwentysUser> IwentysUsers { get; set; } = null!;
     public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; } = null!;
@@ -22,7 +23,6 @@ public class IwentysEntityManagerDbContext : DbContext, Application.Abstractions
         IDbContextSeeder dbContextSeeder)
         : base(options)
     {
-        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
