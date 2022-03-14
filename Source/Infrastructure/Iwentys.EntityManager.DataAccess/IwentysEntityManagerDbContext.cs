@@ -18,9 +18,7 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
     public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; } = null!;
     public DbSet<StudyCourse> StudyCourses { get; set; } = null!;
 
-    public IwentysEntityManagerDbContext(
-        DbContextOptions<IwentysEntityManagerDbContext> options,
-        IDbContextSeeder dbContextSeeder)
+    public IwentysEntityManagerDbContext(DbContextOptions<IwentysEntityManagerDbContext> options)
         : base(options)
     {
     }
