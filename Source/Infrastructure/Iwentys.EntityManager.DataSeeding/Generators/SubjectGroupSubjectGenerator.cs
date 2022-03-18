@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
 
@@ -29,7 +30,7 @@ public class SubjectGroupSubjectGenerator : IDbContextSeeder
     public Subject[] Subjects { get; }
     public GroupSubject[] GroupSubjects { get; }
 
-    public void Seed(IwentysEntityManagerDbContext context)
+    public void Seed(IIwentysEntityManagerDbContext context)
     {
         context.Subjects.AddRange(Subjects);
         context.GroupSubjects.AddRange(GroupSubjects);

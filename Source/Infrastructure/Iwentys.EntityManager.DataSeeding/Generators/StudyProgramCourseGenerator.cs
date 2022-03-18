@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
 
@@ -32,7 +33,7 @@ public class StudyProgramCourseGenerator : IDbContextSeeder
     public StudyProgram[] StudyPrograms { get; }
     public StudyCourse[] StudyCourses { get; }
 
-    public void Seed(IwentysEntityManagerDbContext context)
+    public void Seed(IIwentysEntityManagerDbContext context)
     {
         context.StudyPrograms.AddRange(StudyPrograms);
         context.StudyCourses.AddRange(StudyCourses);

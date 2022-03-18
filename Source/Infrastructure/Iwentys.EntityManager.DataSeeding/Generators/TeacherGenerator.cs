@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
 
@@ -15,7 +16,7 @@ public class TeacherGenerator : IDbContextSeeder
 
     public GroupSubjectTeacher[] Teachers { get; }
 
-    public void Seed(IwentysEntityManagerDbContext context)
+    public void Seed(IIwentysEntityManagerDbContext context)
     {
         context.GroupSubjectTeacher.AddRange(Teachers);
     }
