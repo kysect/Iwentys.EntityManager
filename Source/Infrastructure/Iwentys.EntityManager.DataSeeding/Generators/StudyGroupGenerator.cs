@@ -20,7 +20,7 @@ public class StudyGroupGenerator : IDbContextSeeder
         }
 
         StudyGroup frediGroup = studyGroupFaker.Generate();
-        frediGroup.GroupName = new GroupName("M3505").Name;
+        frediGroup.GroupName = new GroupName("M3505");
         groups.Add(frediGroup);
 
         StudyGroups = groups.ToArray();

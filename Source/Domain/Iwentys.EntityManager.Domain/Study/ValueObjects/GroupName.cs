@@ -2,6 +2,10 @@
 
 public class GroupName
 {
+    protected GroupName()
+    {
+    }
+
     public GroupName(string name)
     {
         //FYI: russian letter
@@ -26,4 +30,14 @@ public class GroupName
     public int Course { get; }
     public int Number { get; }
     public string Name { get; }
+
+    private bool Equals(GroupName groupName)
+    {
+        return Name == groupName.Name;
+    }
+    
+    public override bool Equals(object? obj)
+    {
+        return obj is GroupName groupName && Equals(groupName);
+    }
 }

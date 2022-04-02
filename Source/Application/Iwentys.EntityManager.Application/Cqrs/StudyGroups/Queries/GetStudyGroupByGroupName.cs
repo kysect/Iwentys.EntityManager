@@ -30,7 +30,7 @@ public static class GetStudyGroupByGroupName
             var name = new GroupName(request.GroupName);
             var result = await _context
                 .StudyGroups
-                .Where(StudyGroup.IsMatch(name))
+                .Where(sg => sg.GroupName == name)
                 .ProjectTo<StudyGroupDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 

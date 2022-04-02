@@ -12,7 +12,7 @@ public class StudyGroupFaker : Faker<StudyGroup>
     {
 // TODO: Proper StudyCourse seeding injection
         StudyCourse studyCourse = new Faker().PickRandom(studyProgramCourseGenerator.StudyCourses);
-        CustomInstantiator(f => new StudyGroup(MakeGroupName(f).Name, studyCourse.Id) {Id = GetId() });
+        CustomInstantiator(f => new StudyGroup(MakeGroupName(f), studyCourse.Id) {Id = GetId() });
     }
 
     private int GetId()

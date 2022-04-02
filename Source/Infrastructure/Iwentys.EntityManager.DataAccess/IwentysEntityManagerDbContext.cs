@@ -34,6 +34,7 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
         modelBuilder.Entity<GroupSubject>().OwnsOne(gs => gs.GithubOrganization);
         modelBuilder.Entity<StudyGroup>().Navigation(sg => sg.Students).HasField("_students");
         modelBuilder.Entity<StudyGroup>().HasMany(sg => sg.Students).WithOne(s => s.Group);
+        modelBuilder.Entity<StudyGroup>().OwnsOne(sg => sg.GroupName);
         modelBuilder.Entity<Subject>().Navigation(s => s.GroupSubjects).HasField("_groupSubjects");
         modelBuilder.Entity<Subject>().HasMany(s => s.GroupSubjects).WithOne(gs => gs.Subject);
 
