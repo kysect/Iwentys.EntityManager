@@ -33,5 +33,8 @@ public static class DatabaseConfigurator
         var context = serviceScope.ServiceProvider.GetRequiredService<IwentysEntityManagerDbContext>();
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
+
+        var generator = serviceScope.ServiceProvider.GetRequiredService<DatabaseContextGenerator>();
+        generator.Seed(context);
     }
 }

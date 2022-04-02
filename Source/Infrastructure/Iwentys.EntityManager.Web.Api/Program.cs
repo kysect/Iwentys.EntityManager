@@ -1,7 +1,7 @@
-using Iwentys.EntityManager.Application;
+using Iwentys.EntityManager.DataAccess;
+using Iwentys.EntityManager.DataSeeding;
 using Iwentys.EntityManager.Web.Configuration;
 using Iwentys.EntityManager.Web.Controllers;
-using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,7 @@ builder.Services
     .AddEntityManagerControllers()
     .SerializeEnumsAsStrings();
 
+builder.Services.AddScoped<DatabaseContextGenerator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
