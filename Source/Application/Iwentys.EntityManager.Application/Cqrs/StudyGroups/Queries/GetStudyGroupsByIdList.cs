@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.Application;
 
 public static class GetStudyGroupsByIdList
 {
-    public record Query(List<int> GroupIdList) : IRequest<Response>;
+    public record Query(IReadOnlyList<int> GroupIdList) : IRequest<Response>;
     public record Response(IReadOnlyCollection<StudyGroupDto> StudyGroups);
 
     public class Handler : IRequestHandler<Query, Response>

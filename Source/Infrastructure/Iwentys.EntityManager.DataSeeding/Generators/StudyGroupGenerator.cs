@@ -1,7 +1,7 @@
 ﻿using Bogus;
+using Iwentys.EntityManager.Application.Abstractions;
 using Iwentys.EntityManager.DataAccess;
 using Iwentys.EntityManager.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Iwentys.EntityManager.DataSeeding;
 
@@ -28,8 +28,8 @@ public class StudyGroupGenerator : IDbContextSeeder
 
     public StudyGroup[] StudyGroups { get; }
 
-    public void Seed(ModelBuilder modelBuilder)
+    public void Seed(IIwentysEntityManagerDbContext context)
     {
-        // TODO: Надо бы переделать seed, чтобы он работал не с modelBuilder, а с DBContext, чтобы не было проблем с owned типами
+        context.StudyGroups.AddRange(StudyGroups);
     }
 }

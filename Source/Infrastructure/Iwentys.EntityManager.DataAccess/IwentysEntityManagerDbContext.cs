@@ -7,8 +7,6 @@ namespace Iwentys.EntityManager.DataAccess;
 
 public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbContext
 {
-    private readonly IDbContextSeeder _dbContextSeeder;
-
     public DbSet<IwentysUser> IwentysUsers { get; set; } = null!;
     public DbSet<UniversitySystemUser> UniversitySystemUsers { get; set; } = null!;
 
@@ -20,12 +18,9 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
     public DbSet<GroupSubjectTeacher> GroupSubjectTeacher { get; set; } = null!;
     public DbSet<StudyCourse> StudyCourses { get; set; } = null!;
 
-    public IwentysEntityManagerDbContext(
-        DbContextOptions<IwentysEntityManagerDbContext> options,
-        IDbContextSeeder dbContextSeeder)
+    public IwentysEntityManagerDbContext(DbContextOptions<IwentysEntityManagerDbContext> options)
         : base(options)
     {
-        _dbContextSeeder = dbContextSeeder;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,13 +31,12 @@ public class IwentysEntityManagerDbContext : DbContext, IIwentysEntityManagerDbC
 
         modelBuilder.Entity<GroupSubject>().Navigation(gs => gs.Teachers).HasField("_teachers");
         modelBuilder.Entity<GroupSubject>().HasMany(gs => gs.Teachers).WithOne(t => t.GroupSubject);
+        modelBuilder.Entity<GroupSubject>().OwnsOne(gs => gs.GithubOrganization);
         modelBuilder.Entity<StudyGroup>().Navigation(sg => sg.Students).HasField("_students");
         modelBuilder.Entity<StudyGroup>().HasMany(sg => sg.Students).WithOne(s => s.Group);
         modelBuilder.Entity<StudyGroup>().OwnsOne(sg => sg.GroupName);
         modelBuilder.Entity<Subject>().Navigation(s => s.GroupSubjects).HasField("_groupSubjects");
         modelBuilder.Entity<Subject>().HasMany(s => s.GroupSubjects).WithOne(gs => gs.Subject);
-
-        _dbContextSeeder.Seed(modelBuilder);
 
         RemoveCascadeDeleting(modelBuilder);
         base.OnModelCreating(modelBuilder);

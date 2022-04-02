@@ -7,13 +7,9 @@
     <PackageId>Kysect.Iwentys.EntityManager.ApiClient</PackageId>
     <Authors>Kysect</Authors>
     <Company>Kysect</Company>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <RootNamespace>Iwentys.EntityManager.ApiClient</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="IwentysEntityManagerClient.nswag" />
-  </ItemGroup>
 
 </Project>

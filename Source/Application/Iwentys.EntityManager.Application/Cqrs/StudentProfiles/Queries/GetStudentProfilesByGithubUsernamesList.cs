@@ -9,7 +9,7 @@ namespace Iwentys.EntityManager.Application;
 
 public static class GetStudentProfilesByGithubUsernamesList
 {
-    public record Query(List<string> GithubUsernamesList) : IRequest<Response>;
+    public record Query(IReadOnlyList<string> GithubUsernamesList) : IRequest<Response>;
     public record Response(IReadOnlyCollection<StudentDto> Students);
 
     public class Handler : IRequestHandler<Query, Response>

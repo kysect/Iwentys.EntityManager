@@ -1,15 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Iwentys.EntityManager.Application.Abstractions;
 
 namespace Iwentys.EntityManager.DataAccess;
 
 public interface IDbContextSeeder
 {
-    void Seed(ModelBuilder modelBuilder);
-}
-
-public class EmptyDbContextSeeder : IDbContextSeeder
-{
-    public void Seed(ModelBuilder modelBuilder)
-    {
-    }
+    void Seed(IIwentysEntityManagerDbContext context);
 }
