@@ -3,22 +3,13 @@ using Iwentys.EntityManager.Domain;
 using Iwentys.EntityManager.Dtos;
 using Iwentys.EntityManager.Dtos.ValueObjects;
 
-namespace Iwentys.EntityManager.Application;
+namespace Iwentys.EntityManager.MappingConfiguration;
 
 public class EntityManagerMappingProfile : Profile
 {
     public EntityManagerMappingProfile()
     {
-        CreateMap<UniversitySystemUser, UniversitySystemUserDto>();
-        CreateMap<IwentysUser, IwentysUserDto>();
-        CreateMap<Student, StudentDto>();
-        CreateMap<StudentStatus, StudentStatusDto>();
-
-        CreateMap<Subject, SubjectDto>();
-        CreateMap<StudyGroup, StudyGroupInnerDto>();
-        CreateMap<StudyGroup, StudyGroupDto>();
-        CreateMap<GroupSubject, GroupSubjectDto>();
-
+        CreateMap<StudentStatusType, StudentStatusTypeDto>();
         CreateMapForMentors();
     }
 

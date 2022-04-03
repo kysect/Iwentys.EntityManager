@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Iwentys.EntityManager.Application;
+using Iwentys.EntityManager.MappingConfiguration;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
