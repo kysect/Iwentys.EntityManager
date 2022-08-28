@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Iwentys.EntityManager.Application.csproj.DotSettings" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="FuzzySharp" Version="2.0.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Iwentys.EntityManager.Domain\Iwentys.EntityManager.Domain.csproj" />
+    <ProjectReference Include="..\Iwentys.EntityManager.Application.Abstractions\Iwentys.EntityManager.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\Iwentys.EntityManager.Dtos\Iwentys.EntityManager.Dtos.csproj" />
+  </ItemGroup>
+
+</Project>
