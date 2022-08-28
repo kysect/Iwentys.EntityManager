@@ -1,1 +1,5 @@
-Iwentys.EntityManager
+Данный проект заморожен вместе с основным проектом - https://github.com/kysect/Iwentys.
+
+# Iwentys.EntityManager
+
+Iwentys.EntityManager - один из сервисов микросервисной архитектуры Iwentys, который представляет собой user service. Он отвечает за управление данными пользователей, шаринг этих данных между другими сервисами в системе.
